@@ -1,0 +1,45 @@
+<!-- Fullscreen Black Overlay -->
+<div class="position-fixed top-0 start-0 w-100 h-100 bg-black d-flex flex-column justify-content-center align-items-center z-1050">
+
+  <!-- Bootstrap Carousel -->
+   <!-- data-bs-ride="carousel" -->
+  <div id="mediaCarousel" class="carousel slide w-100 h-100" >
+    <div class="carousel-inner h-100">
+      <div *ngFor="let item of images; let i = index" 
+           class="carousel-item h-100" 
+           [class.active]="i === 0">
+
+        <!-- Image -->
+        <img *ngIf="IsImge(item.fileBase64)" 
+             [src]="getImageUrl(item.fileBase64)" 
+             class="d-block w-100 h-100 object-fit-contain" 
+             alt="Media Image" />
+
+        <!-- Video -->
+        <video *ngIf="isvedio(item.fileBase64)" 
+               controls 
+               class="d-block w-100 h-100 object-fit-contain">
+          <source [src]="getImageUrl(item.fileBase64)" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+
+        <!-- PDF -->
+        <iframe *ngIf="ispdf(item.fileBase64)" 
+                [src]="loadPdf(item.fileBase64)" 
+                class="d-block w-100 h-100" 
+                style="border: none;"></iframe>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation Buttons with Arrows -->
+  <div class="d-flex justify-content-between w-100 px-5 position-absolute bottom-0 mb-4">
+    <button class="btn btn-light d-flex align-items-center fs-4 py-3 px-4" style="margin-inline-start: 10%;" (click)="prevSlide()">
+      <i class="fas fa-arrow-right me-3 fa-lg"></i> 
+    </button>
+    <button class="btn btn-light d-flex align-items-center fs-4 py-3 px-4"  style="margin-inline-end: 10%;" (click)="nextSlide()">
+       <i class="fas fa-arrow-left me-3 fa-lg"></i>
+    </button>
+  </div>
+</div>

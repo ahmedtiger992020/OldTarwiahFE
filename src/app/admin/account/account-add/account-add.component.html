@@ -1,0 +1,109 @@
+<nz-breadcrumb>
+	<nz-breadcrumb-item><a routerLink="/dashboard">HOME</a></nz-breadcrumb-item>
+	<nz-breadcrumb-item><a routerLink="/account/list">USERS</a></nz-breadcrumb-item>
+	<nz-breadcrumb-item>ADD USER</nz-breadcrumb-item>
+</nz-breadcrumb>
+
+<div class="inner-content">
+	<div class="row">
+		<div class="col-md-12">
+			<section>
+				<h4>Add User</h4>
+				<p></p>
+			</section>
+		</div>
+	</div>
+	<div class="row">
+		<form [formGroup]="addForm" (ngSubmit)="submitForm(addForm.value)">
+			<div class="row">
+				<div class="col">
+					<div class="form-group my-2">
+						<label for="username">Username</label>
+						<input type="text" class="form-control" formControlName="username" placeholder="Enter Username">
+						<div class="alert alert-danger" *ngIf="addForm.controls['username'].invalid && 
+                        (addForm.controls['username'].dirty || addForm.controls['username'].touched)"
+							class="alert alert-danger">
+							this field is required
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col">
+					<div class="form-group my-2">
+						<label for="password">Password</label>
+						<input type="password" class="form-control" formControlName="password" placeholder="Password">
+
+						<div class="alert alert-danger" *ngIf="addForm.controls['password'].invalid && 
+                        (addForm.controls['password'].dirty || addForm.controls['password'].touched)"
+							class="alert alert-danger">
+							this field is required
+						</div>
+					</div>
+				</div>
+				<div class="col">
+					<div class="form-group my-2">
+						<label for="password">Confirm Password</label>
+						<input type="password" class="form-control" formControlName="confirmPassword" placeholder="Confirm Password">
+
+						<div class="alert alert-danger" *ngIf="addForm.controls['confirmPassword'].invalid && 
+                        (addForm.controls['confirmPassword'].dirty || addForm.controls['confirmPassword'].touched)"
+							class="alert alert-danger">
+							this field is required
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col">
+					<div class="form-group my-2">
+						<label for="username">Email</label>
+						<input type="text" class="form-control" formControlName="email" placeholder="Enter Email">
+						<div class="alert alert-danger" *ngIf="addForm.controls['email'].invalid && 
+                        (addForm.controls['email'].dirty || addForm.controls['email'].touched)"
+							class="alert alert-danger">
+							this field is required
+						</div>
+					</div>
+				</div>
+				<div class="col">
+					<div class="form-group my-2">
+						<label for="username">Phone Number</label>
+						<input type="text" class="form-control" formControlName="phoneNumber" placeholder="Enter Phone Number">
+						<div class="alert alert-danger" *ngIf="addForm.controls['phoneNumber'].invalid && 
+                        (addForm.controls['phoneNumber'].dirty || addForm.controls['phoneNumber'].touched)"
+							class="alert alert-danger">
+							this field is required
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col">
+					<div class="form-group my-2">
+						<label for="username">User Role</label>
+						<select class="form-select" formControlName="roleId" placeholder="Select User Role">
+                    <option *ngFor="let option of userRoles" [value]="option.id">{{ option.name }}</option>
+                      </select>
+						<div class="alert alert-danger" *ngIf="addForm.controls['roleId'].invalid && 
+                        (addForm.controls['roleId'].dirty || addForm.controls['roleId'].touched)"
+							class="alert alert-danger">
+							this field is required
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col">
+					<div class="alert alert-danger" *ngIf="errorMessage">{{errorMessage}}</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6 d-flex">
+					<button type="submit" class="btn btn-secondary" routerLink="/account/list">Back</button>
+					<button type="submit" class="btn btn-primary btn-main leftMargin rightMargin">Add User</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>

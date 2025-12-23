@@ -1,0 +1,28 @@
+<div class="form-tab">
+    <form action="#">
+        <div class="form-group">
+            <label>{{ "Location_Selection" | translate}} * </label>
+            <input type="search" [(ngModel)]="toiletSearchValue" [ngModelOptions]="{ standalone: true }" (keypress)="onKeyPressToiletSearch($event)" 
+                   placeholder='{{ "Search_By_Toilet_No" | translate }}' class="form-control" />
+            <i class="fa fa-search" [style]="currentLang == 'en' ? 'right: 0px;' : 'left: 0px;'"></i>
+        </div>
+    </form>
+</div>
+<div class="smallMap map-inner">  
+    <nz-spin [nzSpinning]="isSpinning" [nzSize]="'large'" nzTip='{{ "Loading" | translate }}'>
+      </nz-spin>
+<div id="map">
+</div>
+</div>
+<div class="col-md-12">
+    <div class="pinMessage" [ngSwitch]="isPinSelected">
+        <span *ngSwitchCase="false" class="pinNotSelected">
+            {{ 'Pin_Not_Selected' | translate }}
+        </span>
+        <span *ngSwitchCase="true" class="pinSelected">
+            {{ 'Pin_Selected' | translate }}
+        </span>
+      </div>
+     <button style="display:none;" id="checkPlockNumber" (click)="checkPlockNumber()">testttt</button>
+</div>
+

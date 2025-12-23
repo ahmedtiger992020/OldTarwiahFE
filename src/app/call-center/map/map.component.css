@@ -1,0 +1,42 @@
+
+
+.alert-danger{
+    margin-top: 5px;
+  }
+  #map {
+    height: 100%;
+    width: 100%;
+  }
+  .close{
+    float: none;
+    text-shadow: none;
+    opacity: 1;
+  }
+  nz-date-picker,
+      nz-range-picker {
+        margin: 0 8px 12px 0;
+    }
+  .ant-spin-nested-loading {
+    position: inherit;
+  }
+
+  .pinMessage{
+    text-align: center;
+    padding: 10px;
+    font-weight: 500;
+  }
+  
+  .pinSelected{
+    color: #13A638;
+  }
+  
+  .pinNotSelected{
+    color: red;
+  }
+
+  .fullscreen-modal {
+    width: 100%;
+    height: 100%;
+    max-width: 100vw;
+    max-height: 100vh;
+  }

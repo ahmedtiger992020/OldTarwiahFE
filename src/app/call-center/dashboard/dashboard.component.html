@@ -1,0 +1,274 @@
+<div class="tab-reports form-tab form-reports">
+    <div class="col-md-12" style="display: inline-flex;justify-content: center;">
+
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>{{ "CreatedDate" | translate }}</label>
+                <br />
+                <nz-date-picker class="form-control datepicker" nzPlaceHolder='{{ "From" | translate }}'
+                    [(ngModel)]="GetDateFrom" [nzDisabledDate]="disabledDateBefore"></nz-date-picker>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>&nbsp;</label>
+                <br />
+                <nz-date-picker class="form-control datepicker" nzPlaceHolder='{{ "To" | translate }}'
+                    [(ngModel)]="GetDateTo" [nzDisabledDate]="disabledDateAfter"></nz-date-picker>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <button (click)="search()" class="btn btn-form">
+                    <span>
+                        {{ "Search" | translate}}
+                    </span>
+                    <i class="fa fa-search"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="dashboard-counter col-md-12   map-search">
+        <!-- Col -->
+        <h6> {{ "ConfirmedComplaints" | translate }}</h6>
+        <div class="dashboard-counter col-md-12" style="display: inline-flex;justify-content: center;">
+
+            <div class="col-md-3">
+                <div class="count-block">
+                    <h3>
+                        {{ "complaintsCount" | translate }}
+                    </h3>
+                    <h2>
+                        {{GetComplaintsStatisticsPieChartTotal| number}}
+                    </h2>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="count-block">
+                    <h3>
+                        {{ 'CompletedComplaintsCount' | translate }}
+                    </h3>
+                    <h2 style="color: rgb(60, 190, 140);">
+                        {{GetComplaintsStatisticsPieChartData![1]| number}}
+                    </h2>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="count-block">
+                    <h3>
+                        {{ 'RejectedComplaintCount' | translate }}
+                    </h3>
+                    <h2 style="color:rgb(179, 179, 179)">
+                        {{GetComplaintsStatisticsPieChartData![2]| number}}
+
+                    </h2>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="count-block">
+                    <h3>
+                        {{ 'OpenComplaints' | translate }}
+                    </h3>
+                    <h2 style="color: rgb(227, 194, 45);">
+                        {{GetComplaintsStatisticsPieChartData![0]| number}}
+
+                    </h2>
+                </div>
+            </div>
+
+            <!-- /Col -->
+            <!-- Col -->
+        </div>
+    </div>
+    <div class="dashboard-counter col-md-12   map-search" style="margin-top: 2%;">
+        <h6> {{ 'KedanaRquests' | translate }}</h6>
+        <div class="dashboard-counter col-md-12" style="display: inline-flex;justify-content: center;">
+
+
+
+            <div class="col-md-3">
+                <div class="count-block">
+                    <h3>
+                        {{ 'complaintsCount' | translate }}
+                    </h3>
+                    <h2 *ngIf="cardsData">
+                        {{cardsData!.kedanaComplaints!.total| number}}
+                    </h2>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="count-block">
+                    <h3>
+                        {{ 'ConfirmedeComlaintsCount' | translate }}
+                    </h3>
+                    <h2  *ngIf="cardsData" style="color: rgb(60, 190, 140);">
+                        {{cardsData!.kedanaComplaints!.acceptedKedanaComp| number}}
+                    </h2>
+                </div>
+            </div>
+            <!-- /Col -->
+            <!-- Col -->
+
+            <!-- /Col -->
+            <!-- Col -->
+            <div class="col-md-3">
+                <div class="count-block">
+                    <h3>
+                        {{ 'RejectedKedanaCount' | translate }}
+                    </h3>
+                    <h2 *ngIf="cardsData" style="color:rgb(179, 179, 179)">
+                        {{cardsData!.kedanaComplaints!.rejectededKedanaComp| number}}
+                    </h2>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="count-block">
+                    <h3>
+                        {{ 'KedanaRequestsCount' | translate }}
+
+                    </h3>
+                    <h2 *ngIf="cardsData" style="color: rgb(227, 194, 45);">
+                        {{cardsData!.kedanaComplaints!.openedKedanaComplaint| number}}
+
+                    </h2>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="dashboard-counter col-md-12   map-search" style="margin-top: 2%;">
+        <!-- Col -->
+        <h6> تفاصيل البلاغات المؤكدة المحولة من كدانه
+        </h6>
+        <div class="dashboard-counter col-md-12" style="display: inline-flex;justify-content: center;">
+
+            <div class="col-md-3">
+                <div class="count-block">
+                    <h3>
+                        عدد البلاغات المكتملة
+                    </h3>
+                    <h2 *ngIf="cardsData">
+                        {{cardsData!.confirmedKedanaComplaints!.completedComplaint| number}} </h2>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="count-block">
+                    <h3>
+                        عدد البلاغات التي تم اعادتها لكدانه لعدم الاختصاص من الفرق الميدانية
+
+                    </h3>
+                    <h2 *ngIf="cardsData" style="color:rgb(179, 179, 179)">
+                        {{cardsData!.confirmedKedanaComplaints!.cancelledComplaint| number}} </h2>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="count-block">
+                    <h3>
+                        عدد البلاغات تحت المعالجة </h3>
+                    <h2 *ngIf="cardsData" style="color: rgb(227, 194, 45);">
+                        {{cardsData!.confirmedKedanaComplaints!.openedComplaint| number}}
+
+                    </h2>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    <div class="col-md-12 map-search " style="display:  inline-flex;justify-content: center;margin-top: 2%;">
+
+
+        <div class="col-md-3" style="justify-content: center;">
+            <h6 style="    justify-self: center;">{{ "RPAUtilization" | translate}} </h6>
+            <h6 style="    justify-self: center;">{{GetKedanaBraManualPieChartTotal}}</h6>
+            <app-doughnut-chart [labels]="GetKedanaBraManualPieChartLabel" [data]="GetKedanaBraManualPieChartData"
+                [backgroundColor]="['rgb(60, 190, 140)','#347AE2']" [borderColor]="['rgba(113, 192, 113, 1)','#347AE2']"
+                [Id]="'p5'"></app-doughnut-chart>
+
+        </div>
+        <!-- <div class="col-md-1"></div> -->
+        <!-- <div class="col-md-3 ">
+            <h6 style="    justify-self: center;">{{ "KedanaRequets" | translate}}</h6>
+            <h6 style="    justify-self: center;">{{GetKedanaStatisticsPieChartTotal}}</h6>
+
+            <app-doughnut-chart [labels]="GetKedanaStatisticsPieChartLabel" [data]="GetKedanaStatisticsPieChartData"
+                [backgroundColor]="['#cccccc','#ff9999','rgb(60, 190, 140)']"
+                [borderColor]="['rgba(204, 204, 204, 1)','rgba(255, 99, 132, 1)','gba(113, 192, 113, 1)']"
+                [Id]="'p1'"></app-doughnut-chart>
+
+        </div>
+        <div class="col-md-1"></div> -->
+
+        <!-- <div class="col-md-2">
+
+        </div> -->
+        <!-- <div class="col-md-3">
+            <h6 style="    justify-self: center;">{{ "ComplaintStatus" | translate}}</h6>
+            <h6 style="    justify-self: center;">{{GetComplaintsStatisticsPieChartTotal}}</h6>
+
+            <app-doughnut-chart [labels]="GetComplaintsStatisticsPieChartLabel"
+                [data]="GetComplaintsStatisticsPieChartData" [Id]="'p2'"
+                [backgroundColor]="['#8fc1ff','rgb(60, 190, 140)','#ff9999']"
+                [borderColor]="['rgba(143, 193, 255, 1)','rgba(113, 192, 113, 1)','rgba(255, 99, 132, 1)']"></app-doughnut-chart>
+
+        </div> -->
+        <!-- <div class="col-md-1"></div> -->
+
+        <!-- </div>
+    <div class="col-md-12 map-search" style="display: inline-flex;justify-content: center;"> -->
+        <div class="col-md-3" style="justify-content: center;">
+            <h6 style="    justify-self: center;">{{ "ComplaintSource" | translate}}</h6>
+            <h6 style="    justify-self: center;">{{GetComplaintsBySourcePieChartTotal}}</h6>
+
+            <app-doughnut-chart [labels]="GetComplaintsBySourcePieChartLabel" [data]="GetComplaintsBySourcePieChartData"
+                [backgroundColor]="['#347AE2','#8fc1ff','rgb(60, 190, 140)']"
+                [borderColor]="['rgba(113, 192, 113, 1)','rgba(143, 193, 255, 1)','rgba(113, 192, 113, 1)']"
+                [Id]="'p3'"></app-doughnut-chart>
+
+        </div>
+        <!-- <div class="col-md-1"></div> -->
+
+        <!-- <div class="col-md-3" style="justify-content: center;">
+            <h6 style="    justify-self: center;">{{ "KedanaRquestsStatus" | translate}}</h6>
+            <h6 style="    justify-self: center;">{{GetKedanaComplaintsPieChartTotal}}</h6>
+
+            <app-doughnut-chart [labels]="GetKedanaComplaintsPieChartLabel" [data]="GetKedanaComplaintsPieChartData"
+                [backgroundColor]="['rgb(179, 179, 179)','rgb(60, 190, 140)','rgb(227, 194, 45)','rgb(206 219 25)']"
+                [borderColor]="['rgba(204, 204, 204, 1)','rgba(113, 192, 113, 1)','rgb(227, 194, 45)','rgb(206 219 25)']"
+                [Id]="'p4'"></app-doughnut-chart>
+
+        </div> -->
+        <!-- <div class="col-md-1"></div> -->
+
+        <div class="col-md-3" style="justify-content: center;">
+            <h6 style="    justify-self: center;">{{ "MashaerComplaint" | translate}}</h6>
+            <h6 style="    justify-self: center;">{{GetComplaintsByMashaarPieChartTotal}}</h6>
+            <app-doughnut-chart [labels]="GetComplaintsByMashaarPieChartLabel"
+                [data]="GetComplaintsByMashaarPieChartData" [Id]="'p6'"></app-doughnut-chart>
+
+        </div>
+        <!-- <div class="col-md-1"></div> -->
+    </div>
+    <div *ngIf="GetComplaintsByDayBarChartData.length>0" class="col-md-12 map-search" style="margin-top: 2%;">
+        <h6>{{ "DayComplaint" | translate}}</h6>
+
+        <app-line-chart class="chart_row" [Labels]="GetComplaintsByDayBarChartLabel" [YTitle]="'complaint' | translate"
+            [Series]="GetComplaintsByDayBarChartData" [displayLegend]="false"></app-line-chart>
+    </div>
+    <!-- <div *ngIf="GetComplaintsByUserBarChartData.length>0" class="col-md-12 map-search" style="margin-top: 2%;">
+        <h6>{{ "UserComplaint" | translate}}</h6>
+        <app-coulmn-chart class="chart_row" [Id]="'c1'" [Labels]="GetComplaintsByUserBarChartLabel"
+            [YTitle]="'complaint' | translate" [Series]="GetComplaintsByUserBarChartData"
+            [displayLegend]="false"></app-coulmn-chart>
+    </div> -->
+
+    <div *ngIf="GetComplaintsByMantinanceAreaBarChartData.length>0" class="col-md-12 map-search"
+        style="margin-top: 2%;">
+        <h6>{{ "MaintananceComplaint" | translate}}</h6>
+        <app-coulmn-chart class="chart_row" [Id]="'c2'" [Labels]="GetComplaintsByMantinanceAreaBarChartLabel"
+            [YTitle]="'complaint' | translate" [Series]="GetComplaintsByMantinanceAreaBarChartData"
+            [displayLegend]="true" [postitionLegamd]="'bottom'"></app-coulmn-chart>
+    </div>
+</div>

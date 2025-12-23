@@ -1,0 +1,82 @@
+<section [dir]="direction" class="intro-h"
+	style="background-image: url(assets/images/bg.png); background-position: center; background-repeat: no-repeat; background-size: cover;">
+	<div class="overlay-img">
+		<img src="assets/images/bg.png" alt="#" />
+	</div>
+
+	<div class="container">
+		<div class="row">
+			<!-- Col -->
+			<div class="col-md-6">
+				<div class="intro-logo">
+					<img src="assets/images/logo.svg" alt="#" />
+				</div>
+			</div>
+			<!-- /Col -->
+			<!-- Col -->
+			<div class="col-md-6">
+				<div class="intro-form">
+					<div class="intro-title">
+						<h2>
+							{{'Welcome' | translate}}
+						</h2>
+						<h3>
+							{{ "Please_Login" | translate }}
+						</h3>
+						<button class="lang-icon">
+							<img [src]="currentLang == 'en' ? 'assets/images/ar-flag.png' : 'assets/images/en-flag.png'"
+								(click)="switchLanguage()" />
+						</button>
+					</div>
+
+					<div class="form-h">
+
+						<form [formGroup]="loginForm" (ngSubmit)="submitForm(loginForm.value)">
+							<div class="form-group">
+								<label>{{ "Username" | translate }}</label>
+								<input type="text" class="form-control" formControlName="username"
+									placeholder='{{ "Username" | translate }}' />
+								<div class="alert alert-danger" *ngIf="loginForm.controls['username'].invalid && 
+								(loginForm.controls['username'].dirty || loginForm.controls['username'].touched)" class="alert alert-danger">
+									{{ 'Required_Field' | translate }}
+								</div>
+							</div>
+							<div class="form-group">
+								<nz-spin [nzSpinning]="isSpinningLogin" [nzSize]="'large'"
+									nzTip='{{ "Loading" | translate }}'></nz-spin>
+							</div>
+							<div class="form-group">
+								<label>{{ "Password" | translate }}</label>
+								<input id="password-field" type="password" class="form-control"
+									formControlName="password" placeholder='{{ "Password" | translate }}' />
+
+								<span toggle="#password-field"
+									class="fa fa-fw fa-eye field-icon toggle-password"></span>
+								<div class="alert alert-danger" *ngIf="loginForm.controls['password'].invalid && 
+								(loginForm.controls['password'].dirty || loginForm.controls['password'].touched)" class="alert alert-danger">
+									{{ 'Required_Field' | translate }}
+								</div>
+							</div>
+							<!-- <div class="form-h">
+								<form >
+									 Your form fields here 
+
+									<re-captcha (resolved)="onCaptchaResolved($event)"
+										siteKey="6LfNSFMrAAAAAIiUEcSl9uBERZ8TfhS9DNYFp6QW">
+									</re-captcha>
+[disabled]="!captchaResolved"
+								</form>
+							</div> -->
+
+							<div class="form-group">
+								<button  class="btn btn-intro" type="submit">
+									<span>{{ "Login" | translate }}</span>
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

@@ -1,0 +1,104 @@
+
+  .logo {
+    /* width: 120px;
+    height: 31px;
+    background: rgba(255, 255, 255, 0.2); */
+    margin: 4px 10px 0px -50px;
+    float: left;
+  }
+
+  [nz-menu] {
+    line-height: 64px;
+  } 
+
+  .ant-menu.ant-menu-dark {
+    background: white !important;
+  }
+
+  .bg-light{
+    background-color: #fff !important;
+  }
+  .ant-layout{
+    background-color: #fff !important;
+  }
+
+  .ant-layout-header{
+    line-height: 32px !important;
+  }
+  
+  .nav-link{
+    font-weight: 500;
+  }
+
+
+
+
+.navbar-header .navbar-right {
+  padding: 0 15px;
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  order: 2
+}
+
+.avatar-sm {
+  width: 32px;
+  height: 32px;
+}
+.avatar {
+  position: relative;
+  width: 38px;
+  height: 38px;
+}
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.avatar-lg {
+  width: 64px;
+  height: 64px;
+}
+.rounded-circle {
+  border-radius: 50% !important;
+}
+.rounded-circle {
+  border-radius: 50% !important;
+}
+img {
+  vertical-align: middle;
+  border-style: none;
+}
+img {
+  vertical-align: middle;
+  border-style: none;
+}
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+*, ::after, ::before {
+  box-sizing: border-box;
+}
+user agent stylesheet
+img {
+  overflow-clip-margin: content-box;
+  overflow: clip;
+}
+.mg-b-15{
+  margin-bottom: 15px;
+}
+
+
+nz-avatar {
+  margin-top: 16px;
+  margin-right: 16px;
+}
+
+.userName{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-size: x-large;
+  border-bottom: 2px solid gray;
+  text-transform: uppercase;
+}
