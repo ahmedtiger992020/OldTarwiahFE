@@ -1,0 +1,53 @@
+<nz-breadcrumb>
+	<nz-breadcrumb-item><a routerLink="/dashboard">HOME</a></nz-breadcrumb-item>
+	<nz-breadcrumb-item>DEFAULT AREAS</nz-breadcrumb-item>
+</nz-breadcrumb>
+<div class="inner-content">
+	<div class="row">
+		<div class="col-md-12">
+			<section>
+				<h4>Areas</h4>
+				<p></p>
+			</section>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-11 d-flex"></div>
+		<div class="col-md-1 d-flex">
+			<button nz-button nzType="primary" class="btn btn-primary btn-main"
+                (click)="openModalWithTemplate(modalContentTemplate)">Import</button>
+			<ng-template #modalContentTemplate>
+				<div class="clearfix">
+					<p class="alert alert-danger">Upload JSON file only!</p>
+					<input type="file" (change)="onFileSelected($event)" accept=".json" class="btn" style="margin: 10px;">
+					<button (click)="onUpload()" class="btn btn-outline-primary">Upload</button>
+				</div>
+			</ng-template>
+		</div>
+	</div>
+	<div class="row">
+		<p></p>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<nz-table #rowSelectionTable nzShowPagination="false" [nzData]="listOfData" [nzLoading]="loading"
+				[nzScroll]="{ y: '350px' }">
+				<thead nzSingleSort (nzSortOrderChange)="sort($event)">
+					<tr>
+						<th nzShowSort nzColumnKey="Name">Code</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let data of listOfData">
+						<td>{{ data.name }}</td>
+					</tr>
+				</tbody>
+			</nz-table>
+			<br />
+			<nz-pagination [nzPageSize]="pageFilter.pageSize" [(nzPageIndex)]="pageFilter.pageIndex" [nzTotal]="total"
+				[nzShowTotal]="totalTemplate" nzShowSizeChanger (nzPageIndexChange)="searchData()"
+				(nzPageSizeChange)="onPageSizeChange($event)"></nz-pagination>
+			<ng-template #totalTemplate let-total>Total {{ total }} items</ng-template>
+		</div>
+	</div>
+</div>

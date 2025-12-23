@@ -1,0 +1,30 @@
+.reset-div {
+    all: unset;       /* Unsets everything (including inherited and non-inherited styles) */
+    display: block;   /* You need to set display back if needed */
+  }
+  .modal-backdrop.show {
+    opacity: 0 !important;
+}
+  .modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 10000; /* lower */
+  }
+  
+  .modal {
+    position: fixed;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    z-index: 1050; /* higher */
+    padding: 1rem;
+  }
+  .modal-backdrop {
+    display: none !important;
+  }
+  

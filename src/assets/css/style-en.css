@@ -1,0 +1,116 @@
+body {
+    direction: ltr;
+}
+
+.header-med .head-inner .nav-menu ul li.menu-item-has-children>a::after {
+    left: auto;
+    right: -21px;
+}
+
+.lang-h {
+    right: auto;
+    left: 0;
+}
+
+.btn-lang {
+    transform: translateX(-48%);
+}
+
+.donor-inner .title-donor::before {
+    transform: rotate(16.825deg) translateY(-40px) translateX(-22px);
+}
+
+.donor-inner .title-donor::after {
+    right: auto;
+    left: -90px;
+}
+
+.nice-select:after {
+    left: auto;
+    right: 15px;
+}
+
+.bg-banner {
+    left: auto;
+    right: 0;
+    transform: scaleX(-1);
+    text-align: start;
+}
+
+.slick-slide .blog-block {
+    transform: scale(.88) translateX(-10%);
+}
+
+.slick-slide .galery-block {
+    transform: translateX(18%);
+}
+
+.slick-center+.slick-slide .galery-block {
+    transform: translateX(-18%);
+}
+
+.about-page .img-about {
+    right: 0;
+    left: auto;
+}
+
+.about-page .img-about .bg-block svg {
+    transform: scaleX(-1);
+}
+
+.axes-block h3::before {
+    right: auto;
+    left: 0;
+}
+
+.axes-h+.axes-h.axes-h::before {
+    right: auto;
+    left: calc(28% + 50px);
+}
+
+.axes-h::after {
+    left: auto;
+    right: 0;
+}
+
+.axes-h+.axes-h.axes-h::after {
+    right: auto;
+    left: 0;
+}
+
+.commit-sidebar {
+    direction: rtl;
+}
+
+.commit-sidebar .nav.nav-tabs {
+    direction: ltr;
+}
+
+.header-top .menu-top ul li a::after {
+    left: auto;
+    right: 0;
+}
+
+.links-menu-right a::after {
+    left: auto;
+    right: 0;
+}
+
+.banner-h .item-left {
+    left: auto;
+    right: 0;
+}
+
+.slick-prev, .slick-next {
+    left: auto;
+    right: 112px;
+}
+
+.slick-next {
+    right: 24px;
+}
+
+.all-services {
+    left: auto;
+    right: 0;
+}

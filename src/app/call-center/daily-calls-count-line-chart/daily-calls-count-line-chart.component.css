@@ -1,0 +1,4 @@
+.custom-chart ngx-charts-axis-label text {
+    /* Adjust margin as needed */
+    margin-left: 50px;
+  }

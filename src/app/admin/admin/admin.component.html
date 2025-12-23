@@ -1,0 +1,97 @@
+    <header>
+        <div class="container">
+            <div class="row">
+                <!-- Col -->
+                <div class="col-md-12">
+                    <div class="head-inner">
+                        <!-- Item -->
+                        <div class="item">
+                            <div class="logos">
+                                <div class="logo logo-1">
+                                    <a routerLink="/dashboard">
+                                        <img src="assets/images/logo2.svg" alt="#">
+                                    </a>
+                                </div>
+                                <div class="logo logo-2">
+                                    <a routerLink="/dashboard">
+                                        <img src="assets/images/logo-sec.png" alt="#">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /Item -->
+
+						<div class="item">
+							<app-top-navbar></app-top-navbar>
+						</div>
+
+                        <!-- Item -->
+                        <div class="item">
+                            <div class="user-details">
+                                <div class="user-name">
+                                    <div class="inner-block">
+                                        <div class="name-inner">
+                                            <h3>
+                                                {{LoggedInUsername}}
+                                            </h3>
+                                            <span>
+                                                {{ LoggedInUserRole }}
+                                            </span>
+                                        </div>
+                                        <div class="img">
+                                            <img src="assets/images/pp.jpg" alt="#" />
+                                            <span class="user-status active"></span>
+                                        </div>
+                                    </div>
+                                    <div class="user-dropdown">
+                                        <ul>
+                                            <li>
+                                                <a (click)="signout()">{{ 'Signout' | translate }}</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- <div class="user-notfiction">
+                                <button class="btn-not">
+                                    <i class="fa-regular fa-bell"></i>
+                                    <span class="dot-not"></span>
+                                </button>
+                                <div class="dropdown-not">
+                                    <ul>
+                                        <li>
+                                            هناك حقيقة مثبتة منذ زمن طويل وهي أن المحتوى المقروء لصفحة ما سيلهي القارئ
+                                        </li>
+                                        <li>
+                                            هناك حقيقة مثبتة منذ زمن طويل وهي أن المحتوى المقروء لصفحة ما سيلهي القارئ
+                                        </li>
+                                        <li>
+                                            هناك حقيقة مثبتة منذ زمن طويل وهي أن المحتوى المقروء لصفحة ما سيلهي القارئ
+                                        </li>
+                                        <li>
+                                            هناك حقيقة مثبتة منذ زمن طويل وهي أن المحتوى المقروء لصفحة ما سيلهي القارئ
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div> -->
+                        </div>
+                        <!-- /Item -->
+                    </div>
+                </div>
+                <!-- /Col -->
+            </div>
+        </div>
+    </header>
+    <!-- End Header -->
+
+	
+    <!-- Start Breadcrumb -->
+    <section class="breadcrumb">
+        <div class="overlay-img">
+            <img src="assets/images/breadcrumb.png" alt="#" />
+        </div>
+    </section>
+    <!-- End Breadcrumb -->
+
+	<router-outlet></router-outlet>

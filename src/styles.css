@@ -1,0 +1,12 @@
+/* You can add global styles to this file, and also import other style files */
+@import 'bootstrap/dist/css/bootstrap.min.css';
+/* @import "ag-grid-community/styles/ag-grid.css";
+@import "ag-grid-community/styles/ag-theme-alpine.css";
+@import "ag-grid-community/styles/ag-theme-quartz.css"; */
+
+@import './assets/css/style.css';
+@import './assets/css/animate.css';
+@import './assets/css/mobile.css';
+@import './assets/css/animate.css';
+@import './assets/css/font-awesome.min.css';
+

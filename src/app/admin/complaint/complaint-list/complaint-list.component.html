@@ -1,0 +1,83 @@
+<!-- <nz-breadcrumb>
+	<nz-breadcrumb-item><a routerLink="/dashboard">HOME</a></nz-breadcrumb-item>
+	<nz-breadcrumb-item>COMPLAINTS</nz-breadcrumb-item>
+</nz-breadcrumb> -->
+
+<div class="inner-content">
+	<div class="row">
+		<div class="col-md-12">
+			<section>
+				<h4>Complaints</h4>
+				<p></p>
+			</section>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-2">
+			<div class="form-group my-2">
+				<label for="assetNo">Asset No</label>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="form-group my-2">
+				<input type="text" class="form-control" placeholder="Asset No" [(ngModel)]="searchCriteria.complaintNo">
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="form-group my-2">
+				<button type="submit" class="btn btn-primary btn-main leftMargin rightMargin" (click)="searchData()">Search</button>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<ng-template #modalContentTemplate>
+			<iframe src="https://cprowfmappnlb.nwc.com.sa/WFMComplaintReport_o?ccb=MOB-9170"
+					style="width: 475px; height: 450px;"></iframe>
+		</ng-template>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<nz-table #rowSelectionTable nzShowPagination="false" [nzData]="listOfData" [nzLoading]="loading"
+				[nzScroll]="{ y: '350px' }">
+				<thead nzSingleSort (nzSortOrderChange)="sort($event)">
+					<tr>
+						<th>View</th>
+						<th>Image</th>
+						<th nzShowSort [nzSortFn]="true" nzColumnKey="Id">Complaint No</th>
+						<th nzShowSort nzColumnKey="CreationDate">Date</th>
+						<th>Asset No</th>
+						<th>Description</th>
+						<th>Issuer Name</th>
+						<th>Issuer Mobile</th>
+						<th>Is Synced</th>
+						<th>Source</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let data of listOfData">
+						<td><img src="/assets/images/RemoveRedEye.svg" (click)="openComplaintDetails(data.complaintNo, modalContentTemplate)"></td>
+						<td>
+							<img [src]="data.image" style="height: 50px;">
+            			</td>
+						<td>{{ data.complaintNo }}</td>
+						<td>{{ data.date }}</td>
+						<td>{{ data.assetNo }}</td>
+						<td>{{ data.description }}</td>
+						<td>{{ data.issuerName }}</td>
+						<td>{{ data.issuerMobile }}</td>
+						<td>
+							<span nz-icon [nzType]="data.isSynced ? 'check-circle' : 'close-circle'" nzTheme="twotone"
+                    		[nzTwotoneColor]="data.isSynced ? '#52c41a' : '#ff0000'" style="font-size: 24px;"></span>
+						</td>
+						<td>{{ data.source }}</td>
+					</tr>
+				</tbody>
+			</nz-table>
+			<br />
+			<nz-pagination [nzPageSize]="pageFilter.pageSize" [(nzPageIndex)]="pageFilter.pageIndex" [nzTotal]="total"
+				[nzShowTotal]="totalTemplate" nzShowSizeChanger (nzPageIndexChange)="searchData()"
+				(nzPageSizeChange)="onPageSizeChange($event)"></nz-pagination>
+			<ng-template #totalTemplate let-total>Total {{ total }} items</ng-template>
+		</div>
+	</div>
+</div>

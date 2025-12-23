@@ -1,0 +1,40 @@
+export interface IComplaintDetailVM{
+    workOrderNumber: string;
+    operationNumber: string;
+    taskNumber: string;
+    registrationTime: string;
+    taskYear: string;
+    taskStatus: string;
+    area: string;
+    statusId: number;
+    priorityId: number;
+    priorityNameL: string;
+    priorityName: string;
+    previousFA: string;
+    faReproccessReason: string;
+    meterStatus: string;
+    address: string;
+    fieldTeam: string;
+    integrationNotes: string;
+    workOrderDesc: string;
+    description: string;
+    boNotes: string;
+    lastUpdateDate: string;
+    statusEN: boolean;
+    statusAR: string;
+    agentFeedback: string;
+    completeRemark: string;
+    closingTime: string;
+    supervisorNote: string;
+    imageBase64: string;
+    sourceId: number;
+    malekComplaintNo: number;
+    
+    category: string;
+    subCategory: string;
+    issuerName: string;
+    issuerMobile: string;
+    defaultAssetId: string;
+    createdDate: Date;
+    isSynced:boolean;
+}

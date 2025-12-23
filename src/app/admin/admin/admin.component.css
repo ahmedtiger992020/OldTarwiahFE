@@ -1,0 +1,48 @@
+.layout {
+    min-height: 100vh;
+  }
+
+
+  nz-header {
+    
+    width: 100%;
+    background-color: white;
+  }
+
+  nz-content {
+    padding: 0 50px;
+  }
+
+  nz-breadcrumb {
+    margin: 16px 0;
+  }
+
+  .inner-content {
+    background: #fff;
+    padding: 24px;
+    min-height: 380px;
+  }
+
+  nz-footer {
+    text-align: center;
+  }
+  
+  [nz-menu] {
+    width: 240px;
+  }
+  
+
+  .ant-menu.ant-menu-dark {
+    background: white !important;
+  }
+
+  /* .bg-light{
+    background-color: #fff !important;
+  }
+   .ant-layout{
+    background-color: #fff !important;
+  }  */
+
+  .ant-layout-header{
+    line-height: 32px !important;
+  }

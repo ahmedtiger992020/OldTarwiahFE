@@ -1,0 +1,406 @@
+<div class="tab-reports">
+    <div class="form-tab form-reports">
+        <nz-spin [nzSpinning]="isSpinningSearch" [nzSize]="'large'" nzTip='{{ "Loading" | translate }}'></nz-spin>
+        <form action="#">
+            <div class="form-group row">
+                <div class="col-md-12">
+                    <label>{{ "Please_Enter_Complaint_No" | translate }}</label>
+                </div>
+                <div class="col-md-8">
+                    <input type="search" [(ngModel)]="complaintNoSearch" [ngModelOptions]="{ standalone: true }"
+                        placeholder="..." class="form-control" />
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <button class="btn btn-form" type="submit" (click)="clickComplaintNoSearch()">
+                            <span>
+                                {{ "Inquiry" | translate}}
+                            </span>
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <a class="btn btn-search-more btn-sec">
+                            <span>
+                                {{ "Advanced_Search" | translate}}
+                            </span>
+                            <i class="fa fa-angle-down"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <div class="search-more">
+            <form [formGroup]="advancedSearchForm" (ngSubmit)="submitAdvancedSearch(advancedSearchForm.value)"
+                class="row">
+                <!-- <div class="col-md-4">
+                    <div class="form-group">
+                        <label>{{ "IssureName" | translate }}</label>
+                        <br />
+                        <input type="search" class="form-control" formControlName="issureName_Search" />
+
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>{{ "IssuerMobile" | translate }}</label>
+                        <br />
+                        <input type="search" class="form-control" formControlName="issuerMobile_Search" />
+
+                    </div>
+                </div> -->
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>{{ "Status" | translate }}</label>
+                        <select class="form-control niceSelect" formControlName="Accept_Search">
+                            <option value="0" selected>{{ "Select" | translate }}</option>
+                            <option value="3" >{{ "Open" | translate }}</option>
+
+                            <option value="1" >{{ "Accept" | translate }}</option>
+                            <option value="2" >{{ "Reject" | translate }}</option>
+
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>{{ "CreatedDate" | translate }}</label>
+                        <br />
+                        <nz-date-picker class="form-control datepicker" nzPlaceHolder='{{ "From" | translate }}'
+                            [(ngModel)]="defaultDateFrom" [nzDisabledDate]="disabledDateBefore"
+                            formControlName="dateFrom_Search"></nz-date-picker>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>&nbsp;</label>
+                        <br />
+                        <nz-date-picker class="form-control datepicker" nzPlaceHolder='{{ "To" | translate }}'
+                            [(ngModel)]="defaultDateTo" [nzDisabledDate]="disabledDateAfter"
+                            formControlName="dateTo_Search"></nz-date-picker>
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-form">
+                            <span>
+                                {{ "Search" | translate}}
+                            </span>
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-form" (click)="exportComplaintsToExcel()"
+        [style]="currentLang == 'en' ? 'float:right;margin-top: 20px;' : 'float:left;margin-top: 20px;'">
+        <span>
+            {{ "Export_to_Excel" | translate}}
+        </span>
+        <i class="fa fa-file-excel-o" aria-hidden="true"></i>
+    </button>
+    <div class="table-reports">
+        <table>
+            <thead>
+                <tr>
+                    <th>
+                        {{ 'Complaint_Details' | translate }}
+                    </th>
+                    <th>
+                        {{ 'Complaint_Location' | translate }}
+                    </th>
+                    <!-- <th>
+                        {{ 'Complaint_Image' | translate }}
+                    </th> -->
+                    <th>
+                        {{ 'IssureName' | translate }}
+                    </th>
+                    <th>
+                        {{ 'IssuerMobile' | translate }}
+                    </th>
+                    <th>
+                        {{ 'Kedana_Complaint_No' | translate }}
+                    </th>
+                    <th>
+                        {{ 'CreatedDate' | translate }}
+                    </th>
+
+
+                    <th>
+                        {{ 'lastUpdateDate' | translate }}
+                    </th>
+                    <th style="max-width: 100px;">
+                        {{ 'ReasonReject' | translate }}
+                    </th>
+                    <th>
+                        {{ 'Accept' | translate }}
+                    </th>
+                    <th>
+                        {{ 'Reject' | translate }}
+                    </th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let data of listOfData">
+                    <td>
+                        <button type="button" (click)="openComplaintDetailsModal(data.id)">
+                            <i class="fal fa-eye"></i>
+                        </button>
+                    </td>
+                    <td>
+                        <button *ngIf="data.lat&& data.lng" type="button"
+                            (click)="openComplaintLocation(data.lat, data.lng)">
+                            <i class="fa-duotone fa-map-location-dot"></i>
+                        </button>
+                        <button *ngIf="data.linkLocation" type="button"
+                            (click)="openComplaintLocation(0,0,data.linkLocation)">
+                            <i class="fa-duotone fa-map-location-dot"></i>
+                        </button>
+                    </td>
+                    <!-- <td>
+                        <img [src]="data.image" style="height: 50px;">
+                    </td> -->
+                    <td>
+                        {{ data.issuerName }}
+                    </td>
+                    <td>
+                        {{ data.issuerMobile }}
+                    </td>
+                    <td>
+                        {{ data.kedanaNumber }}
+                    </td>
+                    <td>
+                        <span class="date-h">
+                            {{ data.date | date:'d MMM y HH:mm':'en-US' }}
+                        </span>
+                    </td>
+                    <td>
+                        <span class="date-h">
+                            {{ data.lastUpdateDate | date:'d MMM y HH:mm':'en-US' }}
+                        </span>
+                    </td>
+                    <td style="max-width: 150px;">
+                        {{ data.rejectedReason??'-' }}
+                    </td>
+                    <!-- <td>
+                        <div [ngSwitch]="data.sourceId">
+                            <div *ngSwitchCase="1">
+                                {{ 'Complaint_Source_MobApp' | translate }}
+                            </div>
+                            <div *ngSwitchCase="2">
+                                {{ 'Complaint_Source_Callcenter' | translate }}
+                            </div>
+                            <div *ngSwitchCase="3">
+                                {{ 'Complaint_Source_Kedana' | translate }}
+                            </div>
+                        </div>
+                    </td> -->
+                    <td>
+                        <button *ngIf="data.isAccepted==null" type="button" (click)="acceptComplain(data)">
+                            <i class="fa-duotone ">{{ 'Accept' | translate }}</i>
+                        </button>
+                        <span *ngIf="data.isAccepted" style="color: #6E97CD;">&#10004;</span>
+                    </td>
+                    <td>
+                        <button *ngIf="data.isAccepted==null" type="button" (click)="rejectComplaint(data.id)">
+                            <i class="fa-duotone ">{{ 'Reject' | translate }}</i>
+                        </button>
+                        <span *ngIf="data.isAccepted==false" style="color: #6E97CD;">&#10004;</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <br />
+        <nz-pagination [nzPageSize]="pageFilter.pageSize" [(nzPageIndex)]="pageFilter.pageIndex" [nzTotal]="total"
+            [nzShowTotal]="totalTemplate" nzShowSizeChanger (nzPageIndexChange)="searchData()"
+            (nzPageSizeChange)="onPageSizeChange($event)" [nzPageSizeOptions]="pageSizeOptions"></nz-pagination>
+        <ng-template #totalTemplate let-total>{{ 'Total_Items' | translate }} {{ total }}</ng-template>
+    </div>
+    <!-- class="modal  viewModal" -->
+
+    <div *ngIf="deatilsShow" class="modal fade viewModal show" id="lol" aria-modal="true" role="dialog"
+        style="display: block;background-color: transparent;">
+        <div class="modal-dialog modal-xl" style="min-width:90%; min-height:90%;">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="modal-head">
+                        <h3 style="margin-left: 25px; margin-right: 25px;">
+                            {{ 'Complaint_Info' | translate }}
+                        </h3>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                            (click)="closemodel()">
+                            <i class="far fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="form-tab form-modal">
+                        <form action="#" class="row" style="margin-top: 25px;">
+                            <div class="form-section">
+                                <br />
+
+                                <div class="row">
+
+                                    <!-- <div class="col-md-3 form-group">
+                                        <label class="label">{{ 'DefaultAssetId' | translate }}</label>
+                                        <div class="form-control">
+                                            {{ complaintDetailVM?.defaultAssetId }}
+                                        </div>
+                                    </div> -->
+                                    <div class="col-md-8 form-group">
+                                        <label class="label">{{ 'Description' | translate }}</label>
+                                        <div class="form-control"
+                                            style="white-space: pre-wrap; overflow-y: auto; min-height: 100px;">
+                                            {{ complaintDetailVM?.description }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4 form-group">
+                                        <label class="label">{{ "Source" | translate }}</label>
+                                        <div [ngSwitch]="complaintDetailVM?.sourceId">
+                                            <div *ngSwitchCase="1">
+                                                <div class="form-control">
+                                                    {{ 'Complaint_Source_MobApp' | translate }}
+                                                </div>
+                                            </div>
+                                            <div *ngSwitchCase="2">
+                                                <div class="form-control">
+                                                    {{ 'Complaint_Source_Callcenter' | translate }}
+                                                </div>
+                                            </div>
+                                            <div *ngSwitchCase="3">
+                                                <div class="form-control">
+                                                    {{ 'Complaint_Source_Kedana' | translate }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 form-group">
+                                        <label class="label">{{ 'Kedana_Complaint_No' | translate }}</label>
+                                        <div class="form-control">
+                                            {{ complaintDetailVM?.kedanaNo }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-section">
+                                <div class="form-section-title">{{ 'Issure_Info' | translate }}</div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-md-4 form-group">
+                                        <label class="label">{{ 'IssureName' | translate }}</label>
+                                        <div class="form-control">
+                                            {{ complaintDetailVM?.issuerName }}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 form-group">
+                                        <label class="label">{{ 'IssuerMobile' | translate }}</label>
+                                        <div class="form-control">
+                                            {{ complaintDetailVM?.issuerMobile }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <div class="form-section">
+                                <div class="form-section-title">{{ 'Complaint_Closing_Info' | translate }}</div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-md-6 form-group">
+                                        <label class="label">{{ 'Complaint_ClosingTime' | translate }}</label>
+                                            {{ complaintDetailVM?.closingTime }}
+                                    </div>
+                                    <div class="col-md-6 form-group">
+                                        <label class="label">{{ 'Agent_Feedback' | translate }}</label>
+                                        <div class="form-control textarea-div">
+                                            {{ complaintDetailVM?.agentFeedback }}
+                                        </div>
+                                    </div>
+                                </div>
+                             
+                            </div> -->
+                            <div class="row">
+                                <!-- style="width: 393px; height: 220px; position: absolute;"  -->
+
+                                <div *ngFor="let image of complaintDetailVM?.images" class="col-md-3 form-group"
+                                    style="float: left;">
+                                    <img *ngIf="IsImge(image.fileBase64)" [src]="getImageUrl(image.fileBase64)"
+                                        class="img-fluid " style="width: 250px;height: 250px;" alt="Complaint Image"
+                                        (click)="openImageInPopup(image.fileBase64)">
+                                    <video *ngIf="isvedio(image.fileBase64)" controls
+                                        style="width: 250px;height: 250px;">
+                                        <source [src]="getImageUrl(image.fileBase64)" type="video/mp4" />
+                                        Your browser does not support the video tag.
+                                    </video>
+                                    <iframe *ngIf="ispdf(image.fileBase64)" [src]="loadPdf(image.fileBase64)"
+                                        style="width: 250px;height: 250px;"></iframe>
+
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+                    <!-- <iframe [src]="safeUrl" style="min-height: 800px;"></iframe> -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="imgeshow" class="modal fade viewModal show" aria-modal="true" role="dialog" style="display: block;"
+        id="KedanacomplaintImageModal">
+        <div class="modal-dialog modal-xl" style="min-width:70%; min-height:70%;">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="modal-head">
+                        <h3 style="margin-left: 25px; margin-right: 25px;">
+                            {{ 'Complaint_Image' | translate }}
+                        </h3>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                            (click)="closeimgmodal()">
+                            <i class="far fa-times"></i>
+                        </button>
+                    </div>
+                    <div style="align-items: center; align-content: center;">
+                        <img [src]="viewImge" alt="Complaint Image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="rejectReason" class="modal fade  show" aria-modal="true" role="dialog"
+        style="display: block;background-color: transparent;" id="reasons">
+        <div class="modal-dialog modal-xl" style="min-width:30%; min-height:30%;">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="modal-head">
+                        <h3 style="margin-left: 25px; margin-right: 25px;">
+                            {{ 'toBeReject' | translate }}
+                        </h3>
+                        <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close"
+                            (click)="hideReason()">
+                            <i class="far fa-times"></i>
+                        </button>
+                    </div>
+                    <div style="align-items: center; align-content: center;">
+                        <div class="form-group">
+                            <label>{{ "ReasonReject" | translate }}</label>
+                            <input [(ngModel)]="selectedReason" class="form-control">
+                            <!-- <select class="form-control niceSelect" [(ngModel)]="selectedReason">
+                                <option value="0" selected>{{ "Select" | translate }}</option>
+                                <option *ngFor="let c of categories" [value]="c.id">{{c.name}}</option>
+                            </select> -->
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-danger" (click)="rejectConfirm()">{{"Reject"|translate}}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

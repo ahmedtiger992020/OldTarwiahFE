@@ -1,0 +1,114 @@
+<nz-breadcrumb>
+	<nz-breadcrumb-item>Dashboard</nz-breadcrumb-item>
+	<nz-breadcrumb-item>Complaints</nz-breadcrumb-item>
+	<nz-breadcrumb-item>Add</nz-breadcrumb-item>
+</nz-breadcrumb>
+
+<div class="inner-content">
+	<div class="row">
+		<div class="col-md-12">
+			<section>
+				<h4>Add Complaint</h4>
+				<p></p>
+			</section>
+		</div>
+	</div>
+	
+	<div class="row">
+		<form [formGroup]="addForm" (ngSubmit)="submitForm(addForm.value)">
+      <div class="row">
+        <div class="col-md-6">
+          
+			<div class="row">
+				<div class="col-md-6">
+					<div class="form-group my-2">
+						<label for="nameAr">Name (Arabic)</label>
+						<input type="text" class="form-control" formControlName="nameAr" placeholder="Arabic Name">
+						<div class="alert alert-danger" *ngIf="addForm.controls['nameAr'].invalid && 
+                             (addForm.controls['nameAr'].dirty || addForm.controls['nameAr'].touched)"
+							class="alert alert-danger">
+							this field is required
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group my-2">
+						<label for="nameEn">Name (English)</label>
+						<input type="text" class="form-control" formControlName="nameEn" placeholder="English Name">
+						<div class="alert alert-danger" *ngIf="addForm.controls['nameEn'].invalid && 
+                               (addForm.controls['nameEn'].dirty || addForm.controls['nameEn'].touched)"
+							class="alert alert-danger">
+							this field is required
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+					<div class="form-group my-2">
+						<label for="nameFr">Name (France)</label>
+						<input type="text" class="form-control" formControlName="nameFr" placeholder="France Name">
+						<div class="alert alert-danger" *ngIf="addForm.controls['nameFr'].invalid && 
+                             (addForm.controls['nameFr'].dirty || addForm.controls['nameFr'].touched)"
+							class="alert alert-danger">
+							this field is required
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group my-2">
+						<label for="nameId">Name (Indonesia)</label>
+						<input type="text" class="form-control" formControlName="nameId" placeholder="English Indonesia">
+						<div class="alert alert-danger" *ngIf="addForm.controls['nameId'].invalid && 
+                               (addForm.controls['nameId'].dirty || addForm.controls['nameId'].touched)"
+							class="alert alert-danger">
+							this field is required
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="form-group my-2">
+						<label for="nameUr">Name (Urdu)</label>
+						<input type="text" class="form-control" formControlName="nameUr" placeholder="Urdu Name">
+						<div class="alert alert-danger" *ngIf="addForm.controls['nameUr'].invalid && 
+                             (addForm.controls['nameUr'].dirty || addForm.controls['nameUr'].touched)"
+							class="alert alert-danger">
+							this field is required
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="form-group my-2">
+						<label for="nameUr">Name (Urdu)</label>
+						<input type="text" class="form-control" formControlName="nameUr" placeholder="Urdu Name">
+						<div class="alert alert-danger" *ngIf="addForm.controls['nameUr'].invalid && 
+                             (addForm.controls['nameUr'].dirty || addForm.controls['nameUr'].touched)"
+							class="alert alert-danger">
+							this field is required
+						</div>
+					</div>
+				</div>
+			</div>
+        </div>
+        <div class="col-md-6">
+          <!-- <google-map height="100vh"
+              width="100%"
+              [options]="mapOptions">
+                <map-marker *ngFor="let marker of markers"
+                  [position]="marker.position"></map-marker>
+                </google-map> -->
+        </div>
+      </div>
+			<div class="row">
+				<div class="col-md-3 d-flex">
+					<button type="submit" class="btn btn-secondary" routerLink="/complaint/list">Back</button>
+					<button type="submit" class="btn btn-primary btn-main leftMargin rightMargin">Add Complaint</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>

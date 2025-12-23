@@ -1,0 +1,78 @@
+nz-breadcrumb {
+    margin: 16px 0;
+  }
+
+  .inner-content {
+    background: #fff;
+    padding: 24px;
+    min-height: 380px;
+  }
+  .login-form {
+    max-width: 300px;
+  }
+
+  .login-form-margin {
+    margin-bottom: 16px;
+  }
+
+  .login-form-forgot {
+    float: right;
+  }
+
+  .login-form-button {
+    width: 100%;
+  }
+
+  .inner-content {
+    background: #fff;
+    padding: 24px;
+    min-height: 500px;
+    margin-top: 40px;
+  }
+
+  .sign-wrapper{
+    width: 340px;
+    margin-top: 40px!important;
+    margin-top: 40px;
+    margin-right: 100px;
+  }
+
+  .align-items-center{
+    align-items: center !important;
+  }
+
+  .img-fluid{
+    height: auto;
+  }
+
+  .mx-wd-600{
+    width: 600px;
+  }
+
+  .btn-brand-02 {
+    background-color: #076fc9;
+    border-color: #042893;
+    color: #fff;
+}
+
+.btn-brand-02:hover {
+    background-color: #042893;
+    border-color: #2b4287;
+    color: #fff;
+}
+
+.alert-danger{
+  margin-top: 5px;
+}
+
+.btn{
+  width: 100%;
+}
+
+.leftMargin {
+  margin-left: 20px;
+}
+
+.rightMargin {
+margin-right: 20px;
+}

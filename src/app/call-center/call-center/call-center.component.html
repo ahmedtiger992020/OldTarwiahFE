@@ -1,0 +1,1443 @@
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap4-datetimepicker@5.2.3/build/js/bootstrap-datetimepicker.min.js"></script>
+<link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap4-datetimepicker@5.2.3/build/css/bootstrap-datetimepicker.min.css">
+
+<div [dir]="direction">
+    <!-- Start Header -->
+    <header>
+        <div class="container">
+            <div class="row">
+                <!-- Col -->
+                <div class="col-md-12">
+                    <div class="head-inner">
+                        <!-- Item -->
+                        <div class="item">
+                            <div class="logos">
+                                <div class="logo logo-1">
+                                    <a routerLink="/callcenter">
+                                        <img src="assets/images/logo2.svg" alt="#">
+                                    </a>
+                                    Version 1.7
+                                </div>
+                                <div class="logo logo-2">
+                                    <a routerLink="/callcenter">
+                                        <img src="assets/images/logo-sec.png" alt="#">
+                                    </a>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /Item -->
+                        <!-- Item -->
+                        <div class="item">
+                            <div class="user-details">
+                                <div class="user-name">
+                                    <div class="inner-block">
+                                        <div class="name-inner">
+                                            <h3>
+                                                {{LoggedInUsername}}
+                                            </h3>
+                                            <span>
+                                                {{ LoggedInUserRole }}
+                                            </span>
+                                        </div>
+                                        <div class="img">
+                                            <img src="assets/images/pp.jpg" alt="#" />
+                                            <span class="user-status active"></span>
+                                        </div>
+                                    </div>
+                                    <div class="user-dropdown">
+                                        <ul>
+                                            <li>
+                                                <a (click)="signout()">{{ 'Signout' | translate }}</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="lang-icon">
+                                <img [src]="currentLang == 'en' ? 'assets/images/ar-flag.png' : 'assets/images/en-flag.png'"
+                                    (click)="switchLanguage()" />
+                            </button>
+                            <!-- <div class="user-notfiction">
+                            <button class="btn-not">
+                                <i class="fa-regular fa-bell"></i>
+                                <span class="dot-not"></span>
+                            </button>
+                            <div class="dropdown-not">
+                                <ul>
+                                    <li>
+                                        هناك حقيقة مثبتة منذ زمن طويل وهي أن المحتوى المقروء لصفحة ما سيلهي القارئ
+                                    </li>
+                                    <li>
+                                        هناك حقيقة مثبتة منذ زمن طويل وهي أن المحتوى المقروء لصفحة ما سيلهي القارئ
+                                    </li>
+                                    <li>
+                                        هناك حقيقة مثبتة منذ زمن طويل وهي أن المحتوى المقروء لصفحة ما سيلهي القارئ
+                                    </li>
+                                    <li>
+                                        هناك حقيقة مثبتة منذ زمن طويل وهي أن المحتوى المقروء لصفحة ما سيلهي القارئ
+                                    </li>
+                                </ul>
+                            </div>
+                        </div> -->
+                        </div>
+                        <!-- /Item -->
+                    </div>
+                </div>
+                <!-- /Col -->
+            </div>
+        </div>
+    </header>
+    <!-- End Header -->
+    <!-- Start Breadcrumb -->
+    <section class="breadcrumb">
+        <div class="overlay-img">
+            <img src="assets/images/breadcrumb.png" alt="#" />
+        </div>
+    </section>
+    <!-- End Breadcrumb -->
+    <!-- Start Dashboard-h -->
+    <section class="dashboard-h">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="nav nav-tabs">
+
+                        <li class="nav-item ">
+                            <a class="nav-link active" id="navdash-1" data-bs-toggle="tab" data-bs-target="#dash-1"
+                                href="#dash-1">
+                                <div class="btn-tab">
+                                    <div class="icon">
+                                        <img src="assets/images/icon-1.svg" alt="#" />
+                                    </div>
+                                    <h3>
+                                        {{ "Violations_and_Complaints" | translate }}
+                                    </h3>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" data-bs-toggle="tab" id="navdash-2" data-bs-target="#dash-2"
+                                href="#dash-2" (click)="searchData()">
+                                <div class="btn-tab">
+                                    <div class="icon">
+                                        <img src="assets/images/icon-2.svg" alt="#" />
+                                    </div>
+                                    <h3>
+                                        {{ "Complaints_Inquiry" | translate }}
+                                    </h3>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" data-bs-toggle="tab" data-bs-target="#dash-22" href="#dash-22">
+                                <div class="btn-tab">
+                                    <div class="icon">
+                                        <img src="assets/images/icon-2.svg" alt="#" />
+                                    </div>
+
+                                    <div class="notification-container">
+                                        <h3>
+                                            {{ "KedanaComplaints_Inquiry" | translate }}
+                                        </h3>
+                                        <div *ngIf="opendKedana" class="notification-badge">{{opendKedana}}</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" data-bs-toggle="tab" data-bs-target="#dash-4" href="#dash-4">
+                                <div class="btn-tab">
+                                    <div class="icon">
+                                        <img src="assets/images/icon-3.svg" alt="#" />
+                                    </div>
+                                    <h3>
+                                        {{ "Dashboard" | translate }}
+                                    </h3>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="nav-item " style="display:none">
+                            <a class="nav-link" data-bs-toggle="tab" data-bs-target="#dash-3" href="#dash-3">
+                                <div class="btn-tab">
+                                    <div class="icon">
+                                        <img src="assets/images/icon-3.svg" alt="#" />
+                                    </div>
+                                    <h3>
+                                        {{ "callBoard" | translate }}
+                                    </h3>
+                                </div>
+                            </a>
+                        </li>
+
+                    </ul>
+                    <div class="tab-content">
+                        <!-- Tab1 -->
+                        <div class="tab-pane fade show active" id="dash-1">
+                            <div class="tab-inner row">
+                                <div class="col-md-7">
+                                    <div class="form-tab">
+                                        <div class="title">
+                                            <h2>
+                                                {{ "New_Complaint" | translate }}
+                                            </h2>
+                                        </div>
+                                        <nz-spin [nzSpinning]="isSpinningAddForm" [nzSize]="'large'"
+                                            nzTip='{{ "Loading" | translate }}'></nz-spin>
+                                        <form [formGroup]="addForm" (ngSubmit)="submitForm(addForm.value)" class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>{{ "Category" | translate }}*</label>
+                                                    <select class="form-control niceSelect"
+                                                        formControlName="selectedCategoryId"
+                                                        (change)="onSelectionChange($event)">
+                                                        <option value="" disabled selected>{{ "Select" | translate }}
+                                                        </option>
+                                                        <option *ngFor="let c of categories" [value]="c.id">{{c.name}}
+                                                        </option>
+                                                    </select>
+                                                    <div class="alert alert-danger"
+                                                        *ngIf="addForm.controls['selectedCategoryId'].invalid &&
+                                                                (addForm.controls['selectedCategoryId'].dirty || addForm.controls['selectedCategoryId'].touched)">
+                                                        {{ 'Required_Field' | translate }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>{{ "SubCategory" | translate }}*</label>
+                                                    <select class="form-control niceSelect"
+                                                        formControlName="categoryItemId">
+                                                        <option value="" disabled selected>{{ "Select" | translate }}
+                                                        </option>
+                                                        <option *ngFor="let c of subCategories" [value]="c.id">
+                                                            {{c.name}}</option>
+                                                    </select>
+                                                    <div class="alert alert-danger"
+                                                        *ngIf="addForm.controls['categoryItemId'].invalid &&
+                                                                (addForm.controls['categoryItemId'].dirty || addForm.controls['categoryItemId'].touched)">
+                                                        {{ 'Required_Field' | translate }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="issuerName">{{ "Name" | translate }}</label>
+                                                    <input type="text" class="form-control" formControlName="issuarName"
+                                                        placeholder='{{ "Name" | translate }}' />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="issuarMobile">{{ "Mob_No" | translate }}</label>
+                                                    <input type="text" class="form-control"
+                                                        formControlName="issuarMobile" placeholder="05XXXXXXXX" />
+                                                    <div class="alert alert-danger"
+                                                        *ngIf="addForm.controls['issuarMobile'].invalid &&
+                                                                (addForm.controls['issuarMobile'].dirty || addForm.controls['issuarMobile'].touched)">
+                                                        {{ 'Invalid_Phone_Number' | translate }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>{{ "Complaint_Source" | translate }}</label>
+                                                    <select class="form-control niceSelect"
+                                                        [(ngModel)]="selectedSourceId"
+                                                        [ngModelOptions]="{ standalone: true }">
+                                                        <!-- <option value="" disabled selected>{{ "Select" | translate }}</option> -->
+                                                        <option *ngFor="let c of sources" [value]="c.id">{{c.name}}
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="malekComplaintNo">{{ "Kedana_Complaint_No" | translate
+                                                        }}</label>
+                                                    <input type="text" class="form-control"
+                                                        formControlName="malekComplaintNo" placeholder="00000" />
+                                                    <div class="alert alert-danger"
+                                                        *ngIf="addForm.controls['malekComplaintNo'].invalid &&
+                                                                (addForm.controls['malekComplaintNo'].dirty || addForm.controls['malekComplaintNo'].touched)">
+                                                        {{ 'Invalid_Malek_Number' | translate }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label for="description">{{ "Details" | translate }}*</label>
+                                                    <textarea class="form-control" formControlName="description"
+                                                        placeholder=""></textarea>
+                                                    <div class="alert alert-danger"
+                                                        *ngIf="addForm.controls['description'].invalid &&
+                                                                (addForm.controls['description'].dirty || addForm.controls['description'].touched)">
+                                                        {{ 'Required_Field' | translate }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label>{{ "Attachments" | translate }}</label>
+                                                    <nz-upload nzType="drag" nzListType="picture-card" nzMultiple="true"
+                                                        [nzFileList]="fileList" (nzChange)="handleChange($event)"
+                                                        [nzBeforeUpload]="beforeUpload" [nzPreview]="handlePreview"
+                                                        [nzShowUploadList]="showUploadListConfig"
+                                                        [nzAccept]="'.jpg,.jpeg,.png,.gif,.svg,.mp4,.webm'">
+                                                        <div class="file-upload-group form-control"
+                                                            style="border: 0px;">
+                                                            <span class="span-text file-name"
+                                                                style="align-content: center;">{{ "Drag_and_Drop" |
+                                                                translate }}</span>
+                                                            <span class="for-sm-input-file" for="file-1">
+                                                                {{ "Add_Image" | translate }}
+                                                            </span>
+                                                        </div>
+                                                    </nz-upload>
+                                                </div>
+
+
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <button type="submit" class="btn btn-form">
+                                                        <span>
+                                                            {{ "Open_Complaint" | translate }}
+                                                        </span>
+                                                        <i class="fa fa-check"></i>
+                                                    </button>
+                                                    <!-- <input type="button" class="btn btn-form" (click)="initializeAddForm()"/> -->
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="map-search">
+                                        <app-map [inputData]="inputData" (popup)="popupMap($event)"
+                                            [remove]="mapRemovemarker"
+                                            (notify)="handleChildNotification($event)"></app-map>
+                                        <div class="col-md-12">
+                                            <button mat-button class="btn btn-sec" (click)="openMapFullScreen()">{{
+                                                "Fullscreen" | translate }}</button>
+                                        </div>
+                                    </div>
+                                    <h3>{{notificationData.blockNumber}} {{notificationData.blockNumberDesc}}</h3>
+
+                                    <div class="col-md-12 map-search" *ngIf="totalOpen">
+                                        <div>
+                                            <h5> {{ 'Opened_Complaints' | translate }} : <span
+                                                    style="color:#347ae2 ;">{{totalOpen}}</span></h5>
+                                            <span style="font-size:20px"
+                                                *ngFor="let complain of listofComplaintsCounts ">
+                                                <span [ngStyle]="{
+                                                    'background-color': isOn && complain.opendComplaintsCount? '#347AE2' : 'transparent',
+                                                    color: isOn&& complain.opendComplaintsCount ? 'white' : 'black',
+                                                 
+                                                    }">{{complain.complaintCategory}} :
+                                                    <span
+                                                        [ngStyle]="{ color: complain.opendComplaintsCount === 0 ? 'green' : 'red' }">{{complain.opendComplaintsCount}}</span>
+                                                </span>
+                                                <br>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 map-search" *ngIf="ListsensorData.length>0">
+                                        <h5> {{ 'SensorState' | translate }} </h5>
+                                        <div class="map-search">
+                                            <h5>{{ 'Camp' | translate }} </h5>
+                                            <span style="font-size:20px;color: black;"> {{ 'Water' | translate }} :
+                                                <span *ngFor="let camp of ListsensorData">
+                                                    <span *ngIf="camp.locationName=='Camps' && camp.pressureStatus==1"
+                                                        class="greencircle-before-word"></span>
+                                                    <span *ngIf="camp.locationName=='Camps'&& camp.pressureStatus==2"
+                                                        class="yellowcircle-before-word"></span>
+                                                    <span *ngIf="camp.locationName=='Camps'&& camp.pressureStatus==3"
+                                                        class="redcircle-before-word"></span>
+                                                    <span *ngIf="camp.locationName=='Camps'&& camp.pressureStatus==0"
+                                                        class="graycircle-before-word"></span>
+                                                </span>
+                                            </span>
+                                            <br>
+
+                                            <span style="font-size:20px;color: black;">{{ 'Cooling' | translate }} :
+                                                <span *ngFor="let cooling of ListsensorData">
+                                                    <span
+                                                        *ngIf="cooling.locationName=='Cooling' && cooling.pressureStatus==1"
+                                                        class="greencircle-before-word"></span>
+                                                    <span
+                                                        *ngIf="cooling.locationName=='Cooling'&& cooling.pressureStatus==2"
+                                                        class="yellowcircle-before-word"></span>
+                                                    <span
+                                                        *ngIf="cooling.locationName=='Cooling'&& cooling.pressureStatus==3"
+                                                        class="redcircle-before-word"></span>
+                                                    <span
+                                                        *ngIf="cooling.locationName=='Cooling'&& cooling.pressureStatus==0"
+                                                        class="graycircle-before-word"></span>
+                                                </span>
+                                            </span>
+                                            <br>
+                                            <span style="font-size:20px;color: black;">{{ 'Fire' | translate }} :
+                                                <span *ngFor="let fire of ListsensorData">
+                                                    <span
+                                                        *ngIf="fire.locationName=='Fire pressure out  ' && fire.pressureStatus==1"
+                                                        class="greencircle-before-word"></span>
+                                                    <span
+                                                        *ngIf="fire.locationName=='Fire pressure out  '&& fire.pressureStatus==2"
+                                                        class="yellowcircle-before-word"></span>
+                                                    <span
+                                                        *ngIf="fire.locationName=='Fire pressure out  '&& fire.pressureStatus==3"
+                                                        class="redcircle-before-word"></span>
+
+                                                </span>
+                                            </span>
+                                        </div>
+                                        <br>
+                                        <!-- <div class="map-search">
+                                            <h5>{{ 'Network' | translate }}</h5>
+                                            <span style="font-size:20px;color: black;">
+                                                <span *ngFor="let network of ListsensorData">
+                                                    <span
+                                                        *ngIf="network.locationName=='Pressure Network' && network.pressureStatus==1"
+                                                        class="greencircle-before-word"></span>
+                                                    <span
+                                                        *ngIf="network.locationName=='Pressure Network'&& network.pressureStatus==2"
+                                                        class="yellowcircle-before-word"></span>
+                                                    <span
+                                                        *ngIf="network.locationName=='Pressure Network'&& network.pressureStatus==3"
+                                                        class="redcircle-before-word"></span>
+                                                    <span
+                                                        *ngIf="network.locationName=='Pressure Network'&& network.pressureStatus==0"
+                                                        class="graycircle-before-word"></span>
+                                                </span>
+                                            </span>
+
+                                            <br>
+                                        </div> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /Tab1 -->
+                        <!-- Tab2 -->
+                        <div class="tab-pane fade" id="dash-2">
+                            <div class="tab-reports">
+                                <div class="form-tab form-reports">
+                                    <nz-spin [nzSpinning]="isSpinningSearch" [nzSize]="'large'"
+                                        nzTip='{{ "Loading" | translate }}'></nz-spin>
+                                    <form action="#">
+                                        <div class="form-group row">
+                                            <div class="col-md-12">
+                                                <label>{{ "Please_Enter_Complaint_No" | translate }}</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input type="search" [(ngModel)]="complaintNoSearch"
+                                                    [ngModelOptions]="{ standalone: true }" placeholder="..."
+                                                    class="form-control" />
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    <button class="btn btn-form" type="submit"
+                                                        (click)="clickComplaintNoSearch()">
+                                                        <span>
+                                                            {{ "Inquiry" | translate}}
+                                                        </span>
+                                                        <i class="fa fa-search"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    <a class="btn btn-search-more btn-sec">
+                                                        <span>
+                                                            {{ "Advanced_Search" | translate}}
+                                                        </span>
+                                                        <i class="fa fa-angle-down"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+
+                                    <div class="search-more">
+                                        <form [formGroup]="advancedSearchForm"
+                                            (ngSubmit)="submitAdvancedSearch(advancedSearchForm.value)" class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label>{{ "Category" | translate }}</label>
+                                                    <select class="form-control niceSelect"
+                                                        formControlName="selectedCategoryId_Search"
+                                                        (change)="onSelectionChange($event)">
+                                                        <option value="0" selected>{{ "Select" | translate }}</option>
+                                                        <option *ngFor="let c of categories" [value]="c.id">{{c.name}}
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label>{{ "SubCategory" | translate }}</label>
+                                                    <select class="form-control niceSelect"
+                                                        formControlName="categoryItemId_Search">
+                                                        <option value="0" selected>{{ "Select" | translate }}</option>
+                                                        <option *ngFor="let c of subCategories" [value]="c.id">
+                                                            {{c.name}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label>{{ "Status" | translate }}</label>
+                                                    <select class="form-control niceSelect"
+                                                        formControlName="statusId_Search">
+                                                        <option value="0" selected>{{ "Select" | translate }}</option>
+                                                        <option value="1">{{ "Complaint_Status_Registred" | translate }}
+                                                        </option>
+                                                        <option value="2">{{ "Complaint_Status_Assigned" | translate }}
+                                                        </option>
+                                                        <option value="3">{{ "Complaint_Status_InProgress" | translate
+                                                            }}</option>
+                                                        <option value="4">{{ "Complaint_Status_Completed" | translate }}
+                                                        </option>
+                                                        <option value="5">{{ "Complaint_Status_Cancelled" | translate }}
+                                                        </option>
+                                                        <option value="6">{{ "Complaint_Status_Cancelled_From_Source" |
+                                                            translate }}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label>{{ "Mashaar" | translate }}</label>
+                                                    <select class="form-control niceSelect"
+                                                        formControlName="mashaarId_Search">
+                                                        <option value="0" selected>{{ "Select" | translate }}</option>
+                                                        <option *ngFor="let c of mashaarList" [value]="c.id">{{c.name}}
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label>{{ "CreatedDate" | translate }}</label>
+                                                    <br />
+                                                    <nz-date-picker class="form-control datepicker"
+                                                        nzPlaceHolder='{{ "From" | translate }}'
+                                                        [(ngModel)]="defaultDateFrom"
+                                                        [nzDisabledDate]="disabledDateBefore"
+                                                        formControlName="dateFrom_Search"></nz-date-picker>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label>&nbsp;</label>
+                                                    <br />
+                                                    <nz-date-picker class="form-control datepicker"
+                                                        nzPlaceHolder='{{ "To" | translate }}'
+                                                        [(ngModel)]="defaultDateTo" [nzDisabledDate]="disabledDateAfter"
+                                                        formControlName="dateTo_Search"></nz-date-picker>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>{{ "Source" | translate }}</label>
+                                                    <select class="form-control niceSelect"
+                                                        formControlName="sourceId_Search">
+                                                        <option value="0" selected>{{ "Select" | translate }}</option>
+                                                        <option value="1">{{ 'Complaint_Source_MobApp' | translate }}
+                                                        </option>
+                                                        <option value="2">{{ 'Complaint_Source_Callcenter' | translate
+                                                            }}</option>
+                                                        <option value="3">{{ 'Complaint_Source_Kedana' | translate }}
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>{{ "blocknumber" | translate }}</label>
+                                                    <select class="form-control niceSelect"
+                                                        formControlName="blockId_Search">
+                                                        <option value="" selected>{{ "Select" | translate }}</option>
+                                                        <option *ngFor="let data of listOfBlocks" [value]="data.name">
+                                                            {{data.name}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    <button type="submit" class="btn btn-form">
+                                                        <span>
+                                                            {{ "Search" | translate}}
+                                                        </span>
+                                                        <i class="fa fa-search"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-form" (click)="exportComplaintsToExcel()"
+                                    [style]="currentLang == 'en' ? 'float:right;margin-top: 20px;' : 'float:left;margin-top: 20px;'">
+                                    <span>
+                                        {{ "Export_to_Excel" | translate}}
+                                    </span>
+                                    <i class="fa fa-file-excel-o" aria-hidden="true"></i>
+                                </button>
+                                <div class="table-reports">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    {{ 'Complaint_Details' | translate }}
+                                                </th>
+                                                <th>
+                                                    {{ 'Complaint_Location' | translate }}
+                                                </th>
+                                                <!-- <th>
+                                                {{ 'Complaint_Image' | translate }}
+                                            </th> -->
+                                                <th>
+                                                    {{ 'Complaint_No' | translate }}
+                                                </th>
+                                                <th>
+                                                    {{'Kedana_Complaint_No' | translate}}
+                                                </th>
+                                                <th>
+                                                    {{ 'CreatedDate' | translate }}
+                                                </th>
+                                                <th>
+                                                    {{ 'Mashaar' | translate }}
+                                                </th>
+                                                <th>
+                                                    {{ 'SubCategory' | translate }}
+                                                </th>
+                                                <th>
+                                                    {{ 'Category' | translate }}
+                                                </th>
+                                                <th>
+                                                    {{ 'CreatedBy' | translate }}
+                                                </th>
+                                                <th>
+                                                    {{ 'Complaint_Source' | translate }}
+                                                </th>
+                                                <!-- <th>
+                                                    {{ 'Synced' | translate }}
+                                                </th> -->
+                                                <th>
+                                                    {{ 'Complaint_Status' | translate }}
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let data of listOfData">
+                                                <td>
+                                                    <button type="button" (click)="openComplaintDetailsModal(data.id)">
+                                                        <i class="fal fa-eye"></i>
+                                                    </button>
+                                                </td>
+                                                <td>
+                                                    <button type="button"
+                                                        (click)="openComplaintLocation(data.lat, data.lng)">
+                                                        <i class="fa-duotone fa-map-location-dot"></i>
+                                                    </button>
+                                                </td>
+                                                <!-- <td>
+                                                <img [src]="data.image" style="height: 50px;">
+                                            </td> -->
+                                                <td>
+                                                    {{ data.complaintNo }}
+                                                </td>
+                                                <td>
+                                                    {{data.kedanaNumber}}
+                                                </td>
+                                                <td>
+                                                    <span class="date-h">
+                                                        {{ data.date | date:'d MMM y HH:mm':'en-US' }}
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    {{ data.mashaarName }}
+                                                </td>
+                                                <td>
+                                                    {{ data.subCategory }}
+                                                </td>
+                                                <td>
+                                                    {{ data.category }}
+                                                </td>
+                                                <td>
+                                                    {{ data.createdByUserName }}
+                                                </td>
+                                                <td>
+                                                    <div [ngSwitch]="data.sourceId">
+                                                        <div *ngSwitchCase="1">
+                                                            {{ 'Complaint_Source_MobApp' | translate }}
+                                                        </div>
+                                                        <div *ngSwitchCase="2">
+                                                            {{ 'Complaint_Source_Callcenter' | translate }}
+                                                        </div>
+                                                        <div *ngSwitchCase="3">
+                                                            {{ 'Complaint_Source_Kedana' | translate }}
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <!-- <td>
+                                                    <i *ngIf="data.isSynced" class="fas fa-sync"></i>
+                                                </td> -->
+                                                <td>
+                                                    <div [ngSwitch]="data.statusId">
+                                                        <span *ngSwitchCase="1" class="span-status registred">
+                                                            {{ 'Complaint_Status_Registred' | translate }}
+                                                        </span>
+                                                        <span *ngSwitchCase="2" class="span-status assigned">
+                                                            {{ 'Complaint_Status_Assigned' | translate }}
+                                                        </span>
+                                                        <span *ngSwitchCase="3" class="span-status inProgress">
+                                                            {{ 'Complaint_Status_InProgress' | translate }}
+                                                        </span>
+                                                        <span *ngSwitchCase="4" class="span-status close">
+                                                            {{ 'Complaint_Status_Completed' | translate }}
+                                                        </span>
+                                                        <span *ngSwitchCase="5" class="span-status cancelled">
+                                                            {{ 'Complaint_Status_Cancelled' | translate }}
+                                                        </span>
+                                                        <span *ngSwitchCase="6" class="span-status cancelled">
+                                                            {{ 'Complaint_Status_Cancelled_From_Source' | translate }}
+                                                        </span>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <br />
+                                    <nz-pagination [nzPageSize]="pageFilter.pageSize"
+                                        [(nzPageIndex)]="pageFilter.pageIndex" [nzTotal]="total"
+                                        [nzShowTotal]="totalTemplate" nzShowSizeChanger
+                                        (nzPageIndexChange)="searchData()" (nzPageSizeChange)="onPageSizeChange($event)"
+                                        [nzPageSizeOptions]="pageSizeOptions"></nz-pagination>
+                                    <ng-template #totalTemplate let-total>{{ 'Total_Items' | translate }} {{ total
+                                        }}</ng-template>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="dash-22">
+                            <div *ngIf="Refresh">
+                                <app-kedana-complaint-list
+                                    (AddComplain)="handelAddComplain($event)"></app-kedana-complaint-list>
+
+                            </div>
+                        </div>
+                        <!-- /Tab2 -->
+                        <!-- Tab3 -->
+                        <div class="tab-pane fade" id="dash-3">
+                            <div class="tab-inner dashboard-tab">
+                                <div class="dashboard-head">
+                                    <a class="btn btn-sec" (click)="exportDashboardToExcel()">
+                                        <span>
+                                            {{ "Export_to_Excel" | translate}}
+                                        </span>
+                                        <i class="fa fa-file-excel-o" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                                <div class="dashboard-counter row">
+                                    <!-- Col -->
+                                    <div class="col-md-3">
+                                        <div class="count-block">
+                                            <h3>
+                                                {{ 'TotalCalls' | translate }}
+                                            </h3>
+                                            <h2>
+                                                {{ dashboardStatistics.totalCalls }}
+                                            </h2>
+                                        </div>
+                                    </div>
+                                    <!-- /Col -->
+                                    <!-- Col -->
+                                    <div class="col-md-3">
+                                        <div class="count-block">
+                                            <h3>
+                                                {{ 'AnsweredCalls' | translate }}
+                                            </h3>
+                                            <h2>
+                                                {{ dashboardStatistics.totalAnsweredCalls }}
+                                            </h2>
+                                        </div>
+                                    </div>
+                                    <!-- /Col -->
+                                    <!-- Col -->
+                                    <div class="col-md-3">
+                                        <div class="count-block">
+                                            <h3>
+                                                {{ 'AnsweringTimeAverage' | translate }}
+                                            </h3>
+                                            <h2>
+                                                {{ dashboardStatistics.avrageAnsweredCalls | number:'1.2-2' }}
+                                                <span>{{ 'Seconds' | translate }} </span>
+                                            </h2>
+                                        </div>
+                                    </div>
+                                    <!-- /Col -->
+                                    <!-- Col -->
+                                    <div class="col-md-3">
+                                        <div class="count-block">
+                                            <h3>
+                                                {{ 'MissedCalls' | translate }}
+                                            </h3>
+                                            <h2 class="red-color">
+                                                {{ dashboardStatistics.totalMissedCalls }}
+                                            </h2>
+                                        </div>
+                                    </div>
+                                    <!-- /Col -->
+                                    <!-- Col -->
+                                    <div class="col-md-3">
+                                        <div class="count-block">
+                                            <h3>
+                                                {{ 'MissedCallsTimeAverage' | translate }}
+                                            </h3>
+                                            <h2 class="red-color">
+                                                {{ dashboardStatistics.avrageMissedCalls | number:'1.2-2' }}
+                                                <span>{{ 'Seconds' | translate }} </span>
+                                            </h2>
+                                        </div>
+                                    </div>
+                                    <!-- /Col -->
+                                </div>
+
+                                <div class="chart-h row">
+                                    <!-- Col -->
+                                    <div class="col-md-4">
+                                        <div class="chart-block">
+                                            <div class="title-block">
+                                                <h3>
+                                                    {{ 'CallLang' | translate }}
+                                                </h3>
+                                            </div>
+                                            <div class="chart-inner"
+                                                [style]="currentLang == 'en' ? 'direction:rtl;' : 'direction:ltr;'">
+                                                <app-call-language-pie-chart
+                                                    [inputData]="currentLang"></app-call-language-pie-chart>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /Col -->
+                                    <!-- Col -->
+                                    <div class="col-md-8">
+                                        <div class="chart-block">
+                                            <div class="title-block">
+                                                <h3>
+                                                    {{ 'AnsweredAndMissedCalls' | translate }}
+                                                </h3>
+                                            </div>
+                                            <div class="chart-inner"
+                                                [style]="currentLang == 'en' ? 'direction:rtl;' : 'direction:ltr;'">
+                                                <br /><br />
+                                                <app-calls-count-bar-chart
+                                                    [inputData]="currentLang"></app-calls-count-bar-chart>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /Col -->
+                                    <!-- Col -->
+                                    <div class="col-md-12">
+                                        <div class="chart-block">
+                                            <div class="title-block">
+                                                <h3>
+                                                    {{ 'HourlyCallsCount' | translate }}
+                                                </h3>
+                                            </div>
+                                            <div class="chart-inner"
+                                                [style]="currentLang == 'en' ? 'direction:rtl;' : 'direction:ltr;'">
+                                                <app-daily-calls-count-line-chart
+                                                    [inputData]="currentLang"></app-daily-calls-count-line-chart>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /Col -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="dash-4">
+                            <div *ngIf="Refresh">
+                                <app-dashboard></app-dashboard>
+
+                            </div>
+                        </div>
+                        <!-- /Tab3 -->
+                    </div>
+                </div>
+                <!-- /Col -->
+            </div>
+        </div>
+    </section>
+
+
+    <div class="modal fade viewModal" id="mapModal">
+        <div class="modal-dialog modal-xl" style="min-width:90%; min-height:90%;">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="col-md-12" style="display: inline-flex;justify-content: center;">
+                        <div class="col-md-9">
+                            <app-big-map [inputData]="latlngmarker" [remove]="mapRemovemarker"
+                                (popup)="popupMap($event)" (notify)="handelbigmabnotify($event)"></app-big-map>
+                        </div>
+                        <div class="col-md-3 map-search" style="background-color: white;">
+                            <h3>{{notificationData.blockNumber}} {{notificationData.blockNumberDesc}}</h3>
+
+                            <div class="col-md-12 map-search" style="background-color: white;margin-bottom: 2%;"
+                                *ngIf="ListsensorData.length>0">
+                                <h5> {{ 'SensorState' | translate }} </h5>
+                                <div class="map-search">
+                                    <h5>{{ 'Camp' | translate }} </h5>
+                                    <span style="font-size:20px;color: black;"> {{ 'Water' | translate }} :
+                                        <span *ngFor="let camp of ListsensorData">
+                                            <span *ngIf="camp.locationName=='Camps' && camp.pressureStatus==1"
+                                                class="greencircle-before-word"></span>
+                                            <span *ngIf="camp.locationName=='Camps'&& camp.pressureStatus==2"
+                                                class="yellowcircle-before-word"></span>
+                                            <span *ngIf="camp.locationName=='Camps'&& camp.pressureStatus==3"
+                                                class="redcircle-before-word"></span>
+                                            <span *ngIf="camp.locationName=='Camps'&& camp.pressureStatus==0"
+                                                class="graycircle-before-word"></span>
+                                        </span>
+                                    </span>
+                                    <br>
+
+                                    <span style="font-size:20px;color: black;">{{ 'Cooling' | translate }} :
+                                        <span *ngFor="let cooling of ListsensorData">
+                                            <span *ngIf="cooling.locationName=='Cooling' && cooling.pressureStatus==1"
+                                                class="greencircle-before-word"></span>
+                                            <span *ngIf="cooling.locationName=='Cooling'&& cooling.pressureStatus==2"
+                                                class="yellowcircle-before-word"></span>
+                                            <span *ngIf="cooling.locationName=='Cooling'&& cooling.pressureStatus==3"
+                                                class="redcircle-before-word"></span>
+                                            <span *ngIf="cooling.locationName=='Cooling'&& cooling.pressureStatus==0"
+                                                class="graycircle-before-word"></span>
+                                        </span>
+                                    </span>
+                                    <br>
+                                    <span style="font-size:20px;color: black;">{{ 'Fire' | translate }} :
+                                        <span *ngFor="let fire of ListsensorData">
+                                            <span
+                                                *ngIf="fire.locationName=='Fire pressure out  ' && fire.pressureStatus==1"
+                                                class="greencircle-before-word"></span>
+                                            <span
+                                                *ngIf="fire.locationName=='Fire pressure out  '&& fire.pressureStatus==2"
+                                                class="yellowcircle-before-word"></span>
+                                            <span
+                                                *ngIf="fire.locationName=='Fire pressure out  '&& fire.pressureStatus==3"
+                                                class="redcircle-before-word"></span>
+
+                                        </span>
+                                    </span>
+                                </div>
+                                <br>
+                                <!-- <div class="map-search">
+                                    <h5>{{ 'Network' | translate }}</h5>
+                                    <span style="font-size:20px;color: black;">
+                                        <span *ngFor="let network of ListsensorData">
+                                            <span
+                                                *ngIf="network.locationName=='Pressure Network' && network.pressureStatus==1"
+                                                class="greencircle-before-word"></span>
+                                            <span
+                                                *ngIf="network.locationName=='Pressure Network'&& network.pressureStatus==2"
+                                                class="yellowcircle-before-word"></span>
+                                            <span
+                                                *ngIf="network.locationName=='Pressure Network'&& network.pressureStatus==3"
+                                                class="redcircle-before-word"></span>
+                                            <span
+                                                *ngIf="network.locationName=='Pressure Network'&& network.pressureStatus==0"
+                                                class="graycircle-before-word"></span>
+                                        </span>
+                                    </span>
+
+                                    <br>
+                                </div> -->
+                            </div>
+                            <div class="col-md-12 map-search" style="background-color: white;"
+                                *ngIf="notificationData.blockNumber">
+                                <div>
+                                    <h5> {{ 'Opened_Complaints' | translate }} : <span
+                                            style="color:#347ae2 ;">{{totalOpen}}</span></h5>
+                                    <span style="font-size:20px" *ngFor="let complain of listofComplaintsCounts ">
+                                        <span [ngStyle]="{
+                                                    'background-color': isOn && complain.opendComplaintsCount? '#347AE2' : 'transparent',
+                                                    color: isOn&& complain.opendComplaintsCount ? 'white' : 'black',
+                                                 
+                                                    }">{{complain.complaintCategory}} :
+                                            <span
+                                                [ngStyle]="{ color: complain.opendComplaintsCount === 0 ? 'green' : 'red' }">{{complain.opendComplaintsCount}}</span>
+                                        </span>
+                                        <br>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade viewModal" id="complaintDetailsModal">
+        <div class="modal-dialog modal-xl" style="min-width:90%; min-height:90%;">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="modal-head">
+                        <h3 style="margin-left: 25px; margin-right: 25px;">
+                            <span *ngIf="complaintDetailVM.workOrderNumber == null" style="color: red;">{{
+                                'EmptyComplaintDetails' | translate }}</span>
+                            {{ complaintDetailVM.workOrderNumber }}
+                        </h3>
+                        <div [ngSwitch]="complaintDetailVM.statusId" class="statusContainer">
+                            <span *ngSwitchCase="1" class="span-status registred">
+                                {{ 'Complaint_Status_Registred' | translate }}
+                            </span>
+                            <span *ngSwitchCase="2" class="span-status assigned">
+                                {{ 'Complaint_Status_Assigned' | translate }}
+                            </span>
+                            <span *ngSwitchCase="3" class="span-status inProgress">
+                                {{ 'Complaint_Status_InProgress' | translate }}
+                            </span>
+                            <span *ngSwitchCase="4" class="span-status close">
+                                {{ 'Complaint_Status_Completed' | translate }}
+                            </span>
+                            <span *ngSwitchCase="5" class="span-status cancelled">
+                                {{ 'Complaint_Status_Cancelled' | translate }}
+                            </span>
+                            <i *ngIf="complaintDetailVM.isSynced" style="padding: 10px;" class="fas fa-sync"></i>
+
+                        </div>
+
+
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                            <i class="far fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="form-tab form-modal">
+                        <form action="#" class="row" style="margin-top: 25px;">
+                            <div class="form-section">
+                                <div class="form-section-title">{{ 'Complaint_Info' | translate }}</div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-md-3 form-group">
+                                        <label class="label">{{ 'Category' | translate }}</label>
+                                        <div class="form-control">
+                                            {{ complaintDetailVM.category }}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 form-group">
+                                        <label class="label">{{ 'SubCategory' | translate }}</label>
+                                        <div class="form-control">
+                                            {{ complaintDetailVM.subCategory }}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 form-group">
+                                        <label class="label">{{ 'OperationAndWorkOrderNumber' | translate }}</label>
+                                        <div class="form-control">
+                                            {{ complaintDetailVM.operationNumber }} / {{
+                                            complaintDetailVM.workOrderNumber }}
+                                        </div>
+                                    </div>
+                                      <div class="col-md-3 form-group">
+                                        <label class="label">{{ 'Kedana_Complaint_No' | translate }}</label>
+                                        <div class="form-control">
+                                            {{ complaintDetailVM.malekComplaintNo }}
+                                        </div>
+                                    </div>
+                                    <!-- <div class="col-md-3 form-group" *ngIf="complaintDetailVM.imageBase64">
+                                        <img [src]="getImageUrl(complaintDetailVM.imageBase64)"
+                                            style="width: 393px; height: 220px; position: absolute;"
+                                            alt="Complaint Image"
+                                            (click)="openImageInPopup(complaintDetailVM.imageBase64)">
+                                    </div> -->
+                                    <!-- <div class="col-md-3 form-group" style="justify-items: anchor-center;">
+                                        <label class="label">{{ 'Attachments' | translate }}</label>
+                                        <div>
+                                            <a target="_blank"
+                                                [href]="'/complaintImg?id=' + complaintDetailVM.workOrderNumber"> <i
+                                                    class="fas fa-link fa-3x" title="مرفقات"></i></a>
+
+                                        </div>
+                                    </div> -->
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3 form-group">
+                                        <label class="label">{{ 'Priority' | translate }}</label>
+                                        <div class="form-control">
+                                            {{ complaintDetailVM.priorityName }}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 form-group">
+                                        <label class="label">{{ 'DefaultAssetId' | translate }}</label>
+                                        <div class="form-control">
+                                            {{ complaintDetailVM.defaultAssetId }}
+                                        </div>
+                                    </div>
+                                     <div class="col-md-3 form-group">
+                                        <label class="label">{{ "Source" | translate }}</label>
+                                        <div [ngSwitch]="complaintDetailVM.sourceId">
+                                            <div *ngSwitchCase="1">
+                                                <div class="form-control">
+                                                    {{ 'Complaint_Source_MobApp' | translate }}
+                                                </div>
+                                            </div>
+                                            <div *ngSwitchCase="2">
+                                                <div class="form-control">
+                                                    {{ 'Complaint_Source_Callcenter' | translate }}
+                                                </div>
+                                            </div>
+                                            <div *ngSwitchCase="3">
+                                                <div class="form-control">
+                                                    {{ 'Complaint_Source_Kedana' | translate }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                   
+                                  
+                                    <div class="col-md-9 form-group">
+                                        <label class="label">{{ 'Description' | translate }}</label>
+                                        <!-- <div class="form-control textarea-div">
+                                            {{ complaintDetailVM.description }}
+                                        </div> -->
+                                        <textarea class="form-control textarea-div"
+                                            readonly>  {{ complaintDetailVM.description }}</textarea>
+                                    </div>
+                                    <div class="col-md-3 form-group" style="justify-items: anchor-center;">
+                                        <label class="label">{{ 'Attachments' | translate }}</label>
+                                        <div>
+                                            <a target="_blank"
+                                                [href]="'/complaintImg?id=' + complaintDetailVM.workOrderNumber"> <i
+                                                    class="fas fa-link fa-3x" title="مرفقات"></i></a>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-section">
+                                <div class="form-section-title">{{ 'Issure_Info' | translate }}</div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-md-4 form-group">
+                                        <label class="label">{{ 'IssureName' | translate }}</label>
+                                        <div class="form-control">
+                                            {{ complaintDetailVM.issuerName }}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 form-group">
+                                        <label class="label">{{ 'IssuerMobile' | translate }}</label>
+                                        <div class="form-control">
+                                            {{ complaintDetailVM.issuerMobile }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-section">
+                                <div class="form-section-title">{{ 'Complaint_Closing_Info' | translate }}</div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-md-6 form-group">
+                                        <label class="label">{{ 'Complaint_ClosingTime' | translate }}</label>
+                                        {{ complaintDetailVM.closingTime }}
+                                    </div>
+                                    <div class="col-md-6 form-group">
+                                        <label class="label">{{ 'Agent_Feedback' | translate }}</label>
+                                        <div class="form-control textarea-div">
+                                            {{ complaintDetailVM.agentFeedback }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 form-group">
+                                        <label class="label">{{ 'Complete_SupervisorNote' | translate }}</label>
+                                        <div class="form-control textarea-div">
+                                            {{ complaintDetailVM.supervisorNote }}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 form-group">
+                                        <label class="label">{{ 'Complete_Remark' | translate }}</label>
+                                        <div class="form-control textarea-div">
+                                            {{ complaintDetailVM.completeRemark }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- <iframe [src]="safeUrl" style="min-height: 800px;"></iframe> -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade viewModal" id="complaintImageModal">
+        <div class="modal-dialog modal-xl" style="min-width:70%; min-height:70%;">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="modal-head">
+                        <h3 style="margin-left: 25px; margin-right: 25px;">
+                            {{ 'Complaint_Image' | translate }}
+                        </h3>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                            <i class="far fa-times"></i>
+                        </button>
+                    </div>
+                    <div style="align-items: center; align-content: center;">
+                        <img [src]="getImageUrl(complaintDetailVM.imageBase64)" alt="Complaint Image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade viewModal" id="complaintLocationModal">
+        <!-- <app-complaint-location-map [inputData]="inputData"></app-complaint-location-map> -->
+    </div>
+
+    <div #checkModal class="modal fade checkModal" id="checkModal" tabindex="-1" aria-labelledby="checkModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                        style="position: absolute;">
+                        <i class="far fa-times"></i>
+                    </button>
+                    <div class="checkModal-inner">
+                        <div class="icon">
+                            <img src="assets/images/check.svg" alt="#" />
+                        </div>
+                        <h3>
+                            تم إضافة البلاغ بنجاح
+                        </h3>
+                        <div class="numModal">
+                            رقم البلاغ : {{createdComplaintNo}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade viewModal " id="imgprev" style="background-color: transparent;">
+    <div class="modal-dialog modal-xl" style="min-width:90%; min-height:90%;">
+        <div class="modal-content">
+            <div class="modal-body" style="    align-self: center;">
+                <div class="modal-head">
+
+
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        <i class="far fa-times"></i>
+                    </button>
+                </div>
+                <img *ngIf="IsImge(previewImage)" [src]="previewImage" alt="Preview Image" style="width: 100%" />
+                <video *ngIf="isvedio(previewImage)" [src]="previewImage" controls style="width: 550px;height: 550px;">
+                    Your browser does not support the video tag.
+                </video>
+                <iframe *ngIf="ispdf(previewImage)" [src]="loadPdf(previewImage)"
+                    style="width: 250px;height: 250px;"></iframe>
+
+
+                <!-- <video *ngIf="previewVideoUrl" controls style="width: 100%">
+        <source [src]="previewVideoUrl" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video> -->
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade viewModal " id="sensorpopup">
+    <div class="modal-dialog modal-xl" style="min-width:30%; min-height:30%;">
+        <div *ngIf="sensorData" class="modal-content">
+            <div class="modal-body">
+                <div class="modal-head">
+                    <button *ngIf="currentindex" class="btn btn btn-form" (click)="prevSensor()">
+                        ⏭ Previous
+                    </button>
+                    <h3 style="margin-left: 25px; margin-right: 25px;">
+                        {{sensorData!.tagName}}
+
+                    </h3>
+
+                    <img [src]="popupimg" style="width: 35px;">
+                    <button *ngIf="currentindex < ListsensorData.length-1" class="btn btn btn-form"
+                        (click)="nextSensor()">
+                        Next ⏮
+                    </button>
+                    <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">
+                        <i class="far fa-times"></i>
+                    </button>
+                </div>
+                <div style="align-items: center; align-content: center;">
+
+                    <form action="#" class="row" style="margin-top: 25px;">
+                        <div class="form-section">
+                            <div class="row">
+                                <div class="col-md-6 form-group">
+                                    <label class="label">{{ 'areaName' | translate }}</label>
+                                    <div class="form-control textarea-div">
+                                        {{ sensorData!.areaName }}
+                                    </div>
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <label class="label">{{ 'tagName' | translate }}</label>
+                                    <div class="form-control textarea-div">
+                                        {{ sensorData!.tagName }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3 form-group">
+                                    <label class="label">{{ 'time' | translate }}</label>
+                                    <div class="form-control textarea-div">
+                                        {{ sensorData!.timestamp }}
+                                    </div>
+                                </div>
+                                <div class="col-md-3 form-group">
+                                    <label class="label">{{ 'Status' | translate }}</label>
+                                    <div [ngStyle]="sensorData!.status=='CONNECTED' ?{ 'color': 'green' } : {'color': 'red'} "
+                                        class="form-control textarea-div">
+                                        {{ sensorData!.status }}
+                                    </div>
+                                </div>
+                                <div class="col-md-3 form-group">
+                                    <label class="label">{{ 'pressureStatus' | translate }}</label>
+                                    <div class="form-control textarea-div">
+                                        {{ sensorData!.pressureStatus }}
+                                    </div>
+                                </div>
+                                <div class="col-md-3 form-group">
+                                    <label class="label">{{ 'value' | translate }}</label>
+                                    <div class="form-control textarea-div">
+                                        {{ sensorData!.value }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3 form-group">
+                                    <label class="label">{{ 'minLevel' | translate }}</label>
+                                    <div class="form-control textarea-div">
+                                        {{ sensorData!.minLevel }}
+                                    </div>
+                                </div>
+                                <div class="col-md-3 form-group">
+                                    <label class="label">{{ 'maxLevel' | translate }}</label>
+                                    <div class="form-control textarea-div">
+                                        {{ sensorData!.maxLevel }}
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3 form-group">
+                                    <label class="label">{{ 'minVolume' | translate }}</label>
+                                    <div class="form-control textarea-div">
+                                        {{ sensorData!.minVolume }}
+                                    </div>
+                                </div>
+                                <div class="col-md-3 form-group">
+                                    <label class="label">{{ 'maxVolume' | translate }}</label>
+                                    <div class="form-control textarea-div">
+                                        {{ sensorData!.maxVolume }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3 form-group">
+                                    <label class="label">{{ 'hAlarm' | translate }}</label>
+                                    <div class="form-control textarea-div">
+                                        {{ sensorData!.hAlarm }}
+                                    </div>
+                                </div>
+                                <div class="col-md-3 form-group">
+                                    <label class="label">{{ 'hhAlarm' | translate }}</label>
+                                    <div class="form-control textarea-div">
+                                        {{ sensorData!.hhAlarm }}
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3 form-group">
+                                    <label class="label">{{ 'lAlarm' | translate }}</label>
+                                    <div class="form-control textarea-div">
+                                        {{ sensorData!.lAlarm }}
+                                    </div>
+                                </div>
+                                <div class="col-md-3 form-group">
+                                    <label class="label">{{ 'llAlarm' | translate }}</label>
+                                    <div class="form-control textarea-div">
+                                        {{ sensorData!.llAlarm }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="row">
+                        <app-coulmn-chart class="chart_row" [Id]="'Coulmn'" [Labels]="chartLebels"
+                            [YTitle]="'Sensor' | translate" [Series]="chartData" [Stacked]="true"
+                            [displayLegend]="false"></app-coulmn-chart>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade viewModal" id="confirmAdd">
+    <div class="modal-dialog modal-xl" style="min-width:70%; min-height:70%;">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="modal-head">
+                    <h3 style="margin-left: 25px; margin-right: 25px;">
+                        {{ 'NoteComplain' | translate }}
+
+                    </h3>
+                    <!-- <button (click)="confirmadded()" class="btn btn-form" style="    justify-self: anchor-center;">   {{ 'confirm' | translate }}</button> -->
+
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        <i class="far fa-times"></i>
+                    </button>
+                </div>
+                <div class="form-group" *ngIf="totalOpen || totalclose ">
+                    <h3>
+                        {{ 'complainMessage' | translate }}
+                    </h3>
+                    <div class="map-search" *ngIf="totalOpen">
+                        <h5> {{ 'Opened_Complaints' | translate }} : <span style="color:#347ae2 ;">{{totalOpen}}</span>
+                        </h5>
+                        <span *ngFor="let complain of listofComplaintsCounts ">
+                            <span>{{complain.complaintCategory}} :
+                                <span style="color:#347ae2 ;">{{complain.opendComplaintsCount}}</span>
+                            </span>
+                            <br>
+                        </span>
+                    </div>
+                    <div class="map-search" *ngIf="totalclose">
+                        <h5>{{ 'Closed_Complaints' | translate }} : <span style="color:#347ae2 ;">{{totalclose}}</span>
+                        </h5>
+                        <span *ngFor="let complain of listofComplaintsCounts ">
+                            <span>{{complain.complaintCategory}} :
+                                <span style="color:#347ae2 ;"> {{complain.closedComplaintsCount}}</span>
+                            </span>
+                            <br>
+                        </span>
+
+                    </div>
+                    <br>
+                    <button class="btn btn-sec" (click)="openListTab()"> {{ 'Details' | translate }}</button>
+
+                </div>
+                <!-- <h3 class="pinMessage pinNotSelected ng-star-inserted">
+                        {{ 'confirmMessage' | translate }}
+                 </h3> -->
+                <button (click)="confirmadded()" class="btn btn-form"
+                    style="    justify-self: anchor-center;display: flex;width: 100%;"> {{ 'confirm' | translate
+                    }}</button>
+            </div>
+        </div>
+    </div>
+</div>

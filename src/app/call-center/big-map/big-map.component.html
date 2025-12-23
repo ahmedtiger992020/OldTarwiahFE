@@ -1,0 +1,47 @@
+
+<div class="map-search">
+    <div class="form-tab">
+        <form action="#">
+            <div class="form-group">
+                <label>{{ "Location_Selection" | translate}} * </label>
+                <input type="search" [(ngModel)]="toiletSearchValue" [ngModelOptions]="{ standalone: true }" (keypress)="onKeyPressToiletSearch($event)" 
+                       placeholder='{{ "Search_By_Toilet_No" | translate }}' class="form-control" />
+                <i class="fa fa-search" [style]="currentLang == 'en' ? 'right: 0px;' : 'left: 0px;'"></i>
+            </div>
+        </form>
+    </div>
+    <div class="bigMap map-inner">
+        <nz-spin [nzSpinning]="isSpinning" [nzSize]="'large'" nzTip='{{ "Loading" | translate }}'>
+          </nz-spin>
+    <div id="bigMap" class="containerMap">
+    </div>
+    <div class="overlayList" *ngIf="searchPinResults.length > 0" [style]="currentLang == 'en' ? 'left: 79%;' : 'right: 79%;'">
+        <h4>{{ 'Search_Results' | translate }}</h4>
+        <ul class="centered-list">
+            <li *ngFor="let item of searchPinResults">
+                <button (click)="focusOnPin(item)" class="list-item">{{ item.get("title") }}</button>
+            </li>
+        </ul>
+    </div>
+    <div class="overlayList" *ngIf="complaintList.length > 0" >
+        <h5>{{ 'Opened_Complaints' | translate }}</h5>
+        <ul class="centered-list">
+            <li *ngFor="let item of complaintList">
+                <button (click)="focusOnPin(item)" class="list-item">{{ item.get("title") }}</button>
+            </li>
+        </ul>
+    </div>
+    </div>
+    <div class="col-md-12">
+        <div class="pinMessage" [ngSwitch]="isPinSelected">
+            <span *ngSwitchCase="false" class="pinNotSelected">
+                {{ 'Pin_Not_Selected' | translate }}
+            </span>
+            <span *ngSwitchCase="true" class="pinSelected">
+                {{ 'Pin_Selected' | translate }}
+            </span>
+          </div>
+    </div>
+         <button style="display:none;" id="checkPlockNumber" (click)="checkPlockNumber()">testttt</button>
+
+</div>

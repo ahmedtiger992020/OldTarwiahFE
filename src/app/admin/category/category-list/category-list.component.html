@@ -1,0 +1,74 @@
+<nz-breadcrumb>
+	<nz-breadcrumb-item><a routerLink="/dashboard">HOME</a></nz-breadcrumb-item>
+	<nz-breadcrumb-item>CATEGORIES</nz-breadcrumb-item>
+</nz-breadcrumb>
+
+<div class="inner-content">
+	<div class="row">
+		<div class="col-md-12">
+			<section>
+				<h4>Categories</h4>
+				<p></p>
+			</section>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-11 d-flex"></div>
+		<div class="col-md-1 d-flex">
+			<button nz-button nzType="primary" class="btn btn-primary btn-main"
+                (click)="openModalWithTemplate(modalContentTemplate)">Import</button>
+			<ng-template #modalContentTemplate>
+				<div class="clearfix">
+					<p class="alert alert-danger">Upload JSON file only!</p>
+					<input type="file" (change)="onFileSelected($event)" accept=".json" class="btn" style="margin: 10px;">
+					<button (click)="onUpload()" class="btn btn-outline-primary">Upload</button>
+				</div>
+			</ng-template>
+		</div>
+	</div>
+	<div class="row">
+		<p></p>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<nz-table #rowSelectionTable nzShowPagination="false" [nzData]="listOfData" [nzLoading]="loading"
+				[nzScroll]="{ y: '350px' }">
+				<thead nzSingleSort (nzSortOrderChange)="sort($event)">
+					<tr>
+						<th>Type</th>
+						<th nzShowSort nzColumnKey="NameEn">Name (English)</th>
+						<th nzShowSort nzColumnKey="NameAr">Name (Arabic)</th>
+						<th>Name (France)</th>
+						<th>Name (Farsy)</th>
+						<th>Name (Indonesia)</th>
+						<th>Name (Turky)</th>
+						<th>Name (Urdu)</th>
+						<th>Is Active</th>
+						<th>Is Deleted</th>
+						<th>Items Count</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let data of listOfData">
+						<td>{{ data.type }}</td>
+						<td>{{ data.nameEn }}</td>
+						<td>{{ data.nameAr }}</td>
+						<td>{{ data.nameFr }}</td>
+						<td>{{ data.nameFa }}</td>
+						<td>{{ data.nameId }}</td>
+						<td>{{ data.nameTr }}</td>
+						<td>{{ data.nameUr }}</td>
+						<td>{{ data.isActive }}</td>
+						<td>{{ data.isDeleted }}</td>
+						<td>{{ data.itemsCount }}</td>
+					</tr>
+				</tbody>
+			</nz-table>
+			<br />
+			<nz-pagination [nzPageSize]="pageFilter.pageSize" [(nzPageIndex)]="pageFilter.pageIndex" [nzTotal]="total"
+				[nzShowTotal]="totalTemplate" nzShowSizeChanger (nzPageIndexChange)="searchData()"
+				(nzPageSizeChange)="onPageSizeChange($event)"></nz-pagination>
+			<ng-template #totalTemplate let-total>Total {{ total }} items</ng-template>
+		</div>
+	</div>
+</div>
